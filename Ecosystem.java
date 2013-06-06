@@ -14,17 +14,17 @@ class Ecosystem
     parent=map;
     row=x;
     col=y;
-
+    
     habitat = new Terrain();
     inhabitants = new ArrayList<Organism>();
   }
-      
+  
   public Ecosystem ()
   {
     habitat = new Terrain();
     inhabitants = new ArrayList<Organism>();
   }
-
+  
   public void add (Organism baby)
   {
     inhabitants.add(baby);
@@ -36,14 +36,23 @@ class Ecosystem
     return deceased;
   }
   
-  public String report(){
-   
-
-      for (Organism inhabitant : inhabitants)//For each loop
+  public String manifest(){
+    
+    String manifest="";
+    
+    List<String> species=new ArrayList<String>();
+    for (Organism inhabitant : inhabitants)//For each loop
     {
-     
+      species.add(inhabitant.getSpecies());
     }
     
+    Set<String> unique = new HashSet<String>(species);
+    for (String key : unique) {
+      manifest+=(key + ": " + Collections.frequency(species, key)+"\n");
+    }
+    
+    
+    return manifest;  
     
   }
   

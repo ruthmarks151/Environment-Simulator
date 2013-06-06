@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.lang.Comparable;
+
 abstract class Organism
 {
   private static int foodValue;
@@ -15,7 +18,7 @@ abstract class Organism
     species=createAs;
   }
   
- //Other methods
+  //Other methods
   
   public void act(Ecosystem habitat)
   {
@@ -28,4 +31,7 @@ abstract class Organism
   public void reproduce()
   {
   }
+  
+
 }
+
