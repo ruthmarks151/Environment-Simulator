@@ -12,16 +12,21 @@ abstract class Organism
   public String getSpecies(){return species;}
   
 //Constructors
-  public Organism (Ecosystem eco,String createAs)
+  public Organism (Ecosystem eco,String createAs,int valueAsFood)
+    //eco, THe ecoystem the organism lives in. 
+    //createAs the species of the organism.
+    //valueAsFood How many "Food Points" the creature is worth 
   {
     parent=eco;
     species=createAs;
+    foodValue=valueAsFood;
   }
   
   //Other methods
   
-  public void act(Ecosystem habitat)
+  public void act()
   {
+    
   }
   
   public void die()
