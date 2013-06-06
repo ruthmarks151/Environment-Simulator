@@ -5,23 +5,26 @@ class Ecosystem
   ArrayList<Organism> inhabitants;
   Terrain habitat;
   int row, col;
+  Grid parent;
+  //Getters   
+  public int getRow(){return row;}
+  public int getCol(){return col;}  
   
+  public Ecosystem (Grid map, int x,int y){
+    parent=map;
+    row=x;
+    col=y;
+
+    habitat = new Terrain();
+    inhabitants = new ArrayList<Organism>();
+  }
+      
   public Ecosystem ()
   {
     habitat = new Terrain();
     inhabitants = new ArrayList<Organism>();
   }
-  
-  public int getRow()
-  {
-    return row;
-  }
-  
-  public int getCol()
-  {
-    return col;
-  }
-  
+
   public void add (Organism baby)
   {
     inhabitants.add(baby);
@@ -31,6 +34,17 @@ class Ecosystem
   {
     inhabitants.remove(deceased);
     return deceased;
+  }
+  
+  public String report(){
+   
+
+      for (Organism inhabitant : inhabitants)//For each loop
+    {
+     
+    }
+    
+    
   }
   
   public void update ()

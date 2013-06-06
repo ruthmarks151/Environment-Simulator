@@ -1,22 +1,21 @@
 abstract class Organism
 {
   private static int foodValue;
-  private int row;
-  private int col;
+  private String species;
+  private Ecosystem parent;
+  //Getters
+  public int getRow(){return parent.getRow();}
+  public int getCol(){return parent.getCol();}
+  public String getSpecies(){return species;}
   
-  public Organism ()
+//Constructors
+  public Organism (Ecosystem eco,String createAs)
   {
+    parent=eco;
+    species=createAs;
   }
   
-  public int getRow()
-  {
-    return row;
-  }
-  
-  public int getCol()
-  {
-    return col;
-  }
+ //Other methods
   
   public void act(Ecosystem habitat)
   {

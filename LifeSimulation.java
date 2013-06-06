@@ -4,9 +4,14 @@ class Simulation extends JPanel
 {
   private static Grid myGrid;
   
-  public static Grid getGrid()
-  {
-    return myGrid;
-  }
+  //Getters
+  public static Grid getGrid(){return myGrid;}
   
+  public static void main(String[] args){
+  myGrid=new Grid(1,1);
+  myGrid.getEcosystem(0,0);
+  myGrid.getEcosystem(0,0).add(new Plant (myGrid.getEcosystem(0,0),"Fern"));//Create a fern
+  
+  
+  }
 }

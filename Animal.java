@@ -5,6 +5,9 @@ abstract class Animal extends Organism
   private static ArrayList<Organism> foodSources;
   private static int mobility;
   
+  public Animal (Ecosystem eco,String createAs){
+  super(eco,createAs);
+  }
   public int getMobility ()
   {
     return mobility;
