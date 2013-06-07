@@ -1,6 +1,6 @@
 import java.util.*;
 
-abstract class Animal extends Organism
+class Animal extends Organism
 {
   private static ArrayList<Organism> foodSources;
   private static int mobility;
@@ -9,12 +9,9 @@ abstract class Animal extends Organism
   public int getMobility (){return mobility;}
   
   //Constructor
-  public Animal (Ecosystem eco,String createAs,int valueAsFood)
-    //eco, THe ecoystem the organism lives in. 
-    //createAs the species of the organism.
-    //valueAsFood How many "Food Points" the creature is worth 
+  public Animal (Ecosystem eco,String createAs)//eco, THe ecoystem the organism lives in. //createAs the species of the organism.
   {
-  super(eco,createAs,valueAsFood);
+  super(eco,createAs );
   }
 
   public void eat (Organism other)

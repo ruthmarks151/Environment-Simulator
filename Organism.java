@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.lang.Comparable;
+import java.io.*;
 
 abstract class Organism
 {
@@ -12,14 +13,13 @@ abstract class Organism
   public String getSpecies(){return species;}
   
 //Constructors
-  public Organism (Ecosystem eco,String createAs,int valueAsFood)
+  public Organism (Ecosystem eco,String createAs)
     //eco, THe ecoystem the organism lives in. 
     //createAs the species of the organism.
-    //valueAsFood How many "Food Points" the creature is worth 
   {
     parent=eco;
     species=createAs;
-    foodValue=valueAsFood;
+
   }
   
   //Other methods
