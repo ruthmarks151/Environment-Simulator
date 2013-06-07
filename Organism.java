@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.lang.Comparable;
+
 
 abstract class Organism
 {
@@ -24,7 +27,7 @@ abstract class Organism
     species=createAs;
   }
   
- //Other methods
+  //Other methods
   
   public ArrayList<Ecosystem> getAdjacent() {return parent.getAdjacent();}
   
@@ -51,4 +54,7 @@ abstract class Organism
       catch (IllegalAccessException iaex) {}
     }
   }
+  
+
 }
+

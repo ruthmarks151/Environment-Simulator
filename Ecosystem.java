@@ -39,6 +39,7 @@ class Ecosystem
     }
     return neighbours;
   }
+
   public void add (Organism baby)
   {
     inhabitants.add(baby);
@@ -50,16 +51,23 @@ class Ecosystem
     return deceased;
   }
   
-  public String report(){
+  public String manifest(){
     
+    String manifest="";
     
+    List<String> species=new ArrayList<String>();
     for (Organism inhabitant : inhabitants)//For each loop
     {
-      
+      species.add(inhabitant.getSpecies());
     }
     
-    return "";
+    Set<String> unique = new HashSet<String>(species);
+    for (String key : unique) {
+      manifest+=(key + ": " + Collections.frequency(species, key)+"\n");
+    }
     
+    
+    return manifest;  
     
   }
   
