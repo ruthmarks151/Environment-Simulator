@@ -1,3 +1,0 @@
-class Carnivore extends Animal
-{
-}
