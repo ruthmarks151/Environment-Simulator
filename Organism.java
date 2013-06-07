@@ -15,6 +15,7 @@ abstract class Organism
   public String getSpecies(){return species;}
   public int getFoodValue(){return foodValue;}
   public Ecosystem getParent(){return parent;}
+  public int getEnergy(){return energy;}
   
   public void addEnergy (int food){energy += food;}
   

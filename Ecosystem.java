@@ -33,7 +33,7 @@ class Ecosystem
     {
       for (int c = col - 1; c <= col + 1; c++)
       {
-        if (r > 0 && r < parent.getRows() && c > 0 && c < parent.getCols())
+        if (r >= 0 && r < parent.getRows() && c >= 0 && c < parent.getCols() && r != row && r != col)
           neighbours.add(parent.getMap()[r][c]);
       }
     }

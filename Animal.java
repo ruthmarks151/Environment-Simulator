@@ -16,7 +16,6 @@ abstract class Animal extends Organism
     ArrayList<Ecosystem> destinations = getAdjacent();
     
     int choice = (int) (Math.random() * destinations.size());
-    
     Ecosystem newparent = destinations.get(choice);
     newparent.add(this);
     setParent (newparent);
