@@ -3,13 +3,12 @@ class PreferenceTable{
   private int [] preference;
   
   PreferenceTable(){
-  prefered=new String[0];
+    prefered=new String[0];
     preference=new int[0];
   }
   public void add(String line){
-    System.out.println("Parseing "+line);
-    String name=line.substring(0,(line.indexOf(" ")-1));
-    String number= line.substring((line.indexOf(" ")+1),line.length());
+    String name=line.substring(0,(line.indexOf(":")-1));
+    String number= line.substring((line.indexOf(":")+1),line.length());
     int value=Integer.parseInt(number);
   }
   

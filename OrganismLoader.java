@@ -8,11 +8,8 @@ class OrganismLoader{
   
   OrganismLoader (String species){
     eofs=0;  
-    System.out.println("Constructoring Question loader!");
     try{
-      System.out.print("Making file reader...");
       in = new FileReader(species+".organism");
-      System.out.println("...Succsess!");
     }
     catch(IOException e) {
       System.out.println("Organism file not found");
@@ -33,6 +30,7 @@ class OrganismLoader{
       throw new IOException();}//throw an exception to be caught in the queston deck
   }
   
+  //Reads a line and returns it's string representation
   private String readLine() throws IOException{
     int read;
     String line="";
@@ -40,23 +38,31 @@ class OrganismLoader{
       checkEOF(read);  
       line+=(char)read;//Builds the string char by char
     }
-   return line;
+    return line;
   }
   
-  private int readIntLine() throws IOException{return Integer.parseInt(readLine());} 
+  //Reads a line containing only an integer and returns the integer value
+  private int readIntLine() throws IOException{
+    String num=readLine();
+    return Integer.parseInt(num);} 
   
+  //Loads a series of lines begining with toLoad.
+  //Each line contains a string which is the thing that is prefered
+  //and a number representing the preference value
+  //The section must ehd with \toLoad
   private PreferenceTable ptLoad (String toLoad)throws IOException{
-      String line=readLine();
+    String line=readLine();
     PreferenceTable pt=new PreferenceTable();
     assert(line.equals(toLoad)) : "The file is broken";//Ensures the file isn't broken
-
+    
     while(!(line=readLine()).equals("\\"+toLoad)){
-    pt.add(line);
+      pt.add(line);
     }
     
-return pt;
+    return pt;
     
   }
+  
   
   public Organism read() throws IOException{
     String species;
@@ -69,12 +75,13 @@ return pt;
     lives=ptLoad("Lives");   
     type=readLine();
     if (type.equals("Plant")){
-      return new Plant(null,"placeholder");
+      int photosynthesis=readIntLine(); 
+      return new Plant(species,foodValue,lives,photosynthesis);
     }
     PreferenceTable eats;
     eats=ptLoad("Eats");
-          
-    return new Animal (null,"placeholder");//Temporary return type
+    
+    return new Animal (species,foodValue,lives,eats);//Temporary return type
   }
 }
-  
+

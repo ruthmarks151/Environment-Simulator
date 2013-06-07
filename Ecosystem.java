@@ -65,9 +65,9 @@ class Ecosystem
       lifeform.act();
       //I think we want to implement this at the lifeform level rather than here
       /*if (lifeform.getClass().isAssignableFrom(Animal.class) && (int) Math.random() * 100 < ((Animal) lifeform).getMobility())
-      {
-        //remove(lifeform);
-      }*/
+       {
+       //remove(lifeform);
+       }*/
     }
   }
 }

@@ -11,9 +11,9 @@ class Grid
     map = new Ecosystem[r][c];
     for(int row=0;row<map.length;row++){//Standard iterating through the grid for loop
       for(int col=0;col<map[row].length;col++){//If we could use this tyle for everything that'd be great
-      map[row][col]=new Ecosystem(this,row,col);//Declare each square as new ecosystem with 
+        map[row][col]=new Ecosystem(this,row,col);//Declare each square as new ecosystem with 
       }}
   }
   
-
+  
 }
