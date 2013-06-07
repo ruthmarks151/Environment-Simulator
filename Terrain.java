@@ -3,7 +3,7 @@ class Terrain
 {
   protected int light; //sd 25, mean 50, min 0, max 100
   protected int water; //same as light
-  protected int temp; //
+  protected int temp; //min = -46 max = 42
   
   public Terrain ()
   {
@@ -18,7 +18,6 @@ class Terrain
     water = (int)Math.round(r.nextGaussian()*25)+50;
     }
     while (water > 100 && water < 0);
-    
   }
   
   //Initialize the Environment with given constructors
@@ -55,4 +54,33 @@ class Terrain
     }
   }
   
+  public int getLight ()
+  {
+    return light;
+  }
+  
+  public void changeLight (int num)
+  {
+    light = num;
+  }
+  
+  public int getWater ()
+  {
+    return water;
+  }
+  
+  public void changeWater (int num)
+  {
+    water = num;
+  }
+  
+  public int getTemp ()
+  {
+    return temp;
+  }
+  
+  public void changeTemp (int num)
+  {
+    temp = num;
+  }
 }
