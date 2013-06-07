@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.lang.Comparable;
+import java.io.*;
 
 abstract class Organism
 {
@@ -13,15 +14,19 @@ abstract class Organism
   
 //Constructors
   public Organism (Ecosystem eco,String createAs)
+    //eco, THe ecoystem the organism lives in. 
+    //createAs the species of the organism.
   {
     parent=eco;
     species=createAs;
+
   }
   
   //Other methods
   
-  public void act(Ecosystem habitat)
+  public void act()
   {
+    
   }
   
   public void die()

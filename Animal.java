@@ -1,18 +1,19 @@
 import java.util.*;
 
-abstract class Animal extends Organism
+class Animal extends Organism
 {
   private static ArrayList<Organism> foodSources;
   private static int mobility;
   
-  public Animal (Ecosystem eco,String createAs){
-  super(eco,createAs);
-  }
-  public int getMobility ()
-  {
-    return mobility;
-  }
+  //Getters
+  public int getMobility (){return mobility;}
   
+  //Constructor
+  public Animal (Ecosystem eco,String createAs)//eco, THe ecoystem the organism lives in. //createAs the species of the organism.
+  {
+  super(eco,createAs );
+  }
+
   public void eat (Organism other)
   {
   }
