@@ -45,7 +45,7 @@ class Terrain
     }
     else if (water > 100)
     {
-      water = 100:
+      water = 100;
     }
     
     temp = temperature;
@@ -91,7 +91,7 @@ class Terrain
     }
     else if (water > 100)
     {
-      water = 100:
+      water = 100;
     }
   }
   
