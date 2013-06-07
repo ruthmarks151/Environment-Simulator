@@ -6,7 +6,8 @@ class Ecosystem
   Terrain habitat;
   int row, col;
   Grid parent;
-  //Getters   
+  //Getters
+  public ArrayList<Organism> getInhabitants() {return inhabitants;}
   public int getRow(){return row;}
   public int getCol(){return col;}  
   
@@ -14,17 +15,30 @@ class Ecosystem
     parent=map;
     row=x;
     col=y;
-
+    
     habitat = new Terrain();
     inhabitants = new ArrayList<Organism>();
   }
-      
+  
   public Ecosystem ()
   {
     habitat = new Terrain();
     inhabitants = new ArrayList<Organism>();
   }
-
+  
+  public ArrayList<Ecosystem> getAdjacent()
+  {
+    ArrayList<Ecosystem> neighbours = new ArrayList<Ecosystem>();
+    for (int r = row - 1; r <= row + 1; r++)
+    {
+      for (int c = col - 1; c <= col + 1; c++)
+      {
+        if (r > 0 && r < parent.getRows() && c > 0 && c < parent.getCols())
+          neighbours.add(parent.getMap()[r][c]);
+      }
+    }
+    return neighbours;
+  }
   public void add (Organism baby)
   {
     inhabitants.add(baby);
@@ -37,12 +51,14 @@ class Ecosystem
   }
   
   public String report(){
-   
-
-      for (Organism inhabitant : inhabitants)//For each loop
+    
+    
+    for (Organism inhabitant : inhabitants)//For each loop
     {
-     
+      
     }
+    
+    return "";
     
     
   }
