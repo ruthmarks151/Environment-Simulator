@@ -3,6 +3,8 @@ foodValue 1
 Lives
 Forest 3
 Plains 4
+\Lives
 Type
 Eats
 Fern 2
+\Eats

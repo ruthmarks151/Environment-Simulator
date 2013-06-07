@@ -45,20 +45,36 @@ class OrganismLoader{
   
   private int readIntLine() throws IOException{return Integer.parseInt(readLine());} 
   
+  private PreferenceTable ptLoad (String toLoad)throws IOException{
+      String line=readLine();
+    PreferenceTable pt=new PreferenceTable();
+    assert(line.equals(toLoad)) : "The file is broken";//Ensures the file isn't broken
+
+    while(!(line=readLine()).equals("\\"+toLoad)){
+    pt.add(line);
+    }
+    
+return pt;
+    
+  }
   
   public Organism read() throws IOException{
     String species;
-    String foodValueStr;
-    String heading;
     int foodValue;
+    PreferenceTable lives;
+    String type;
     
     species=readLine();
     foodValue=readIntLine();
-    heading=readLine();
-    assert(heading.equals("Lives")) : "The file is broken";//Ensures the file isn't broken
-
-    
-    return new Herbivore (null,"placeholder");//Temporary return type
+    lives=ptLoad("Lives");   
+    type=readLine();
+    if (type.equals("Plant")){
+      return new Plant(null,"placeholder");
+    }
+    PreferenceTable eats;
+    eats=ptLoad("Eats");
+          
+    return new Animal (null,"placeholder");//Temporary return type
   }
 }
   
