@@ -27,6 +27,7 @@ class Ecosystem
   
   public void add (Organism baby)
   {
+    baby.setParent(this);
     inhabitants.add(baby);
   }
   
