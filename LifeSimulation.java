@@ -1,3 +1,4 @@
+/**********************************************************************************************************************/
 import javax.swing.*;
 import java.io.*;
 
@@ -10,6 +11,9 @@ class Simulation extends JPanel
   
   public static void main(String[] args){
 
+    JFrame jf=new JFrame("");
+    jf.add(new EcosystemEditor());
+    
     myGrid=new Grid(3,3);
     myGrid.getEcosystem(2,2);
     

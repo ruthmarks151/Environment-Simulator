@@ -1,3 +1,4 @@
+/**********************************************************************************************************************/
 import java.io.*;
 
 class OrganismLoader{
@@ -44,6 +45,7 @@ class OrganismLoader{
   //Reads a line containing only an integer and returns the integer value
   private int readIntLine() throws IOException{
     String num=readLine();
+    System.out.println(num);
     return Integer.parseInt(num);} 
   
   //Loads a series of lines begining with toLoad.
