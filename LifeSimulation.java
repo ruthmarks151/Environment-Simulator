@@ -9,21 +9,30 @@ class Simulation extends JPanel
   public static Grid getGrid(){return myGrid;}
   
   public static void main(String[] args){
-    myGrid=new Grid(1,1);
-    myGrid.getEcosystem(0,0);
+
+    myGrid=new Grid(3,3);
+    myGrid.getEcosystem(2,2);
     
       SpeciesTable st=new SpeciesTable();
-    for(int i=0;i<10;i++)
+    for(int i=0;i<3;i++)
       myGrid.getEcosystem(0,0).add(st.make("Fern"));//Create a fern
     for(int i=0;i<1;i++)
       myGrid.getEcosystem(0,0).add(st.make("Bunny"));//Create a bunny
     
     System.out.println(myGrid.getEcosystem(0,0).manifest());
     
-    OrganismLoader ol = new OrganismLoader("Bunny");
-    try{
-      ol.read();} catch (IOException e) {
-        System.out.println("aw snap");
-      }
+    
+    Animal predator = (Animal)(myGrid.getEcosystem(0,0).getInhabitants().get(3));
+    
+    predator.eat(myGrid.getEcosystem(0,0).getInhabitants().get(0));
+    
+    System.out.println(myGrid.getEcosystem(0,0).manifest());
+    predator.move();
+    System.out.println();
+    System.out.println(myGrid.getEcosystem(0,0).manifest());
+    System.out.println(myGrid.getEcosystem(0,1).manifest());
+    System.out.println(myGrid.getEcosystem(1,0).manifest());
+    System.out.println(myGrid.getEcosystem(1,1).manifest());
+  
   }
 }

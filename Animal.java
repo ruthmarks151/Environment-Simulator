@@ -6,13 +6,21 @@ class Animal extends Organism
   private static int mobility;
   private PreferenceTable foods; 
   
-  //Getters
-  public int getMobility (){return mobility;}
   
-  //Constructor
-  Animal (Ecosystem eco,String createAs)//eco, THe ecoystem the organism lives in. //createAs the species of the organism.
+  public Animal (Ecosystem eco,String createAs){
+    super(eco,createAs);
+  }
+  public int getMobility() {return mobility;}
+  
+  public void move()
   {
-    super(eco,createAs );
+    getParent().remove(this);
+    ArrayList<Ecosystem> destinations = getAdjacent();
+    
+    int choice = (int) (Math.random() * destinations.size());
+    Ecosystem newparent = destinations.get(choice);
+    newparent.add(this);
+    setParent (newparent);
   }
   
   Animal (String createAs,int foodPointValue,PreferenceTable placesToLive,PreferenceTable foodsToEat){
@@ -23,5 +31,7 @@ class Animal extends Organism
   
   public void eat (Organism other)
   {
+    addEnergy (other.getFoodValue());
+    other.die();
   }
 }

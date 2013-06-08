@@ -4,6 +4,9 @@ class Grid
   
   //Getters
   public Ecosystem[][] getMap (){return map;}
+  
+  public int getRows() {return map.length;}
+  public int getCols() {return map[0].length;}
   public Ecosystem getEcosystem(int x,int y){return map[x][y];}
   
   public Grid (int r, int c)
@@ -14,6 +17,5 @@ class Grid
         map[row][col]=new Ecosystem(this,row,col);//Declare each square as new ecosystem with 
       }}
   }
-  
-  
+
 }

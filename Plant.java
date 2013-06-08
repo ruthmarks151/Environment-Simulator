@@ -9,8 +9,15 @@ class Plant extends Organism
     super(eco,createAs);
   }
 
+
   Plant(String createAs,int foodPointValue,PreferenceTable placesToLive,int photoSynthesisRequirements){
     super(createAs,foodPointValue,placesToLive);
   photosynthesisSuccess=photoSynthesisRequirements;
+}
+  
+  public void photosynthesize ()
+  {
+    if (Math.random() * 100 < photosynthesisSuccess)
+      addEnergy(1);
   }
 }
