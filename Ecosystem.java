@@ -40,17 +40,40 @@ class Ecosystem
     }
     return neighbours;
   }
-
+  
   public void add (Organism baby)
   {
     baby.setParent(this);
     inhabitants.add(baby);
   }
   
+  public void add (String speciesToAdd,int amount){
+    SpeciesTable st=new SpeciesTable();
+    for (int i=0;i<amount;i++){
+      add(st.make(speciesToAdd));
+    }
+    
+  }
+  
   public Organism remove (Organism deceased)
   {
     inhabitants.remove(deceased);
     return deceased;
+  }
+  
+  public void remove(String speciesToRemove,int amount){
+    
+    for (int i=0;i<amount;i++){
+      for (Organism inhabitant : inhabitants)//For each loop
+      {
+        
+        if(inhabitant.getSpecies().equals(speciesToRemove)){
+          remove(inhabitant);
+          break;
+        }
+        
+      }
+    }
   }
   
   public String manifest(){
@@ -74,6 +97,10 @@ class Ecosystem
     return manifest;  
     
   }
+  
+  
+  
+  
   
   public void update ()
   {

@@ -21,6 +21,7 @@ class EcosystemEditor extends JPanel implements ActionListener{
     
     loadPops();
     
+    //Add 2 JButtons
     addButton=new JButton ("Add");
     saveButton=new JButton ("Save");
     addButton.addActionListener(this);
@@ -31,29 +32,39 @@ class EcosystemEditor extends JPanel implements ActionListener{
     setVisible(true);}
   
   void loadPops(){
-    String manifest=edited.manifest();
+    String manifest=edited.manifest();//Gets the manifest from the ecosystem
     
-    while (manifest.indexOf('\n')!=-1){
-      String line=manifest.substring(0,manifest.indexOf('\n'));   
-      populationRows.add(new PopulationRow(line));
-      manifest=manifest.substring(manifest.indexOf('\n')+1,manifest.length());
+    while (manifest.indexOf('\n')!=-1){//While there are still newlines in the string
+      String line=manifest.substring(0,manifest.indexOf('\n'));//Get the first line of text  
+      populationRows.add(new PopulationRow(line));//Add a population row to the arraylist
+      manifest=manifest.substring(manifest.indexOf('\n')+1,manifest.length());//Remove the line that was just processed from the string
     }
     
-    for(PopulationRow pr:populationRows){
+    for(PopulationRow pr:populationRows){//Add every population row to the panel
       super.add(pr);
     }
   }
   
+  //Changes the population in the Ecosystem
+  private void populationChange(String secies,int change ){
+    
+  }
   
+  //Action Event 
   public void actionPerformed(ActionEvent e){
     System.out.println("Action event");
     
     if (e.getSource().equals(saveButton)){
       for(PopulationRow pr:populationRows){
-        pr.getPopChange();
-        
+        int change;
+        change=pr.getPopChange();
+        if (change>0)
+          edited.add(pr.getSpecies(),change);
+        else
+          edited.remove(pr.getSpecies(),Math.abs(change));
       }
     }
+    System.out.println(edited.manifest());
   }
 }
 
@@ -63,13 +74,20 @@ class PopulationRow extends JPanel {
   private JTextField population;
   private int popInitial;
   
+  public String getSpecies(){return species.getText();}
+  
   public int getPopChange(){
     int change;
     try{  
-      change = Integer.parseInt(population.getText())-popInitial;
-      popInitial=Integer.parseInt(population.getText());
-    } catch (NumberFormatException e){
-      population.setText(""+popInitial);
+      if (Integer.parseInt(population.getText())>=0){      
+        change = Integer.parseInt(population.getText())-popInitial;//Get the change from the last initial value
+        popInitial=Integer.parseInt(population.getText());//Set the initial
+      }else 
+        throw new NumberFormatException();
+      
+    } catch (NumberFormatException e){//If the user did not enter a valid int
+      System.out.println("Number format!");
+      population.setText(""+popInitial);//Reset the population field to the last valid value
       change=0;
     } 
     return change;

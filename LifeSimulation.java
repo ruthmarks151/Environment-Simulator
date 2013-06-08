@@ -29,7 +29,7 @@ class Simulation extends JPanel
     
     jf.pack();
         jf.setVisible(true);
-    
+    /*
     System.out.println(myGrid.getEcosystem(0,0).manifest());
     
     
@@ -44,6 +44,6 @@ class Simulation extends JPanel
     System.out.println(myGrid.getEcosystem(0,1).manifest());
     System.out.println(myGrid.getEcosystem(1,0).manifest());
     System.out.println(myGrid.getEcosystem(1,1).manifest());
-  
+  */
   }
 }
