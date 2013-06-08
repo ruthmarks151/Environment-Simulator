@@ -9,19 +9,26 @@ class Simulation extends JPanel
   //Getters
   public static Grid getGrid(){return myGrid;}
   
+  //Main
   public static void main(String[] args){
 
-    JFrame jf=new JFrame("");
-    jf.add(new EcosystemEditor());
-    
+ //Declare a new grid   
     myGrid=new Grid(3,3);
-    myGrid.getEcosystem(2,2);
     
+//Make the species table
       SpeciesTable st=new SpeciesTable();
     for(int i=0;i<3;i++)
-      myGrid.getEcosystem(0,0).add(st.make("Fern"));//Create a fern
+      myGrid.getEcosystem(0,0).add(st.make("Fern"));//Create 3 fern
     for(int i=0;i<1;i++)
-      myGrid.getEcosystem(0,0).add(st.make("Bunny"));//Create a bunny
+      myGrid.getEcosystem(0,0).add(st.make("Bunny"));//Create 1 bunny
+    
+    
+    //Code to test ecosystem Editor
+    JFrame jf=new JFrame("");
+    jf.add(new EcosystemEditor(myGrid.getEcosystem(0,0)));
+    
+    jf.pack();
+        jf.setVisible(true);
     
     System.out.println(myGrid.getEcosystem(0,0).manifest());
     

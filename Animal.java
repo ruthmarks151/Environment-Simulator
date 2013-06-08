@@ -24,7 +24,10 @@ class Animal extends Organism
     setParent (newparent);
   }
   
-  Animal (String createAs,int foodPointValue,PreferenceTable placesToLive,PreferenceTable foodsToEat){
+  Animal (String createAs,
+          int foodPointValue,
+          PreferenceTable placesToLive,
+          PreferenceTable foodsToEat){
     super(createAs,foodPointValue,placesToLive);
     foods=foodsToEat;
   }
