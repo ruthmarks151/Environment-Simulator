@@ -11,12 +11,12 @@ class Simulation extends JPanel
   
   //Main
   public static void main(String[] args){
-
- //Declare a new grid   
+    
+    //Declare a new grid   
     myGrid=new Grid(3,3);
     
 //Make the species table
-      SpeciesTable st=new SpeciesTable();
+    SpeciesTable st=new SpeciesTable();
     for(int i=0;i<3;i++)
       myGrid.getEcosystem(0,0).add(st.make("Fern"));//Create 3 fern
     for(int i=0;i<1;i++)
@@ -28,22 +28,22 @@ class Simulation extends JPanel
     jf.add(new EcosystemEditor(myGrid.getEcosystem(0,0)));
     
     jf.pack();
-        jf.setVisible(true);
+    jf.setVisible(true);
     /*
-    System.out.println(myGrid.getEcosystem(0,0).manifest());
-    
-    
-    Animal predator = (Animal)(myGrid.getEcosystem(0,0).getInhabitants().get(3));
-    
-    predator.eat(myGrid.getEcosystem(0,0).getInhabitants().get(0));
-    
-    System.out.println(myGrid.getEcosystem(0,0).manifest());
-    predator.move();
-    System.out.println();
-    System.out.println(myGrid.getEcosystem(0,0).manifest());
-    System.out.println(myGrid.getEcosystem(0,1).manifest());
-    System.out.println(myGrid.getEcosystem(1,0).manifest());
-    System.out.println(myGrid.getEcosystem(1,1).manifest());
-  */
+     System.out.println(myGrid.getEcosystem(0,0).manifest());
+     
+     
+     Animal predator = (Animal)(myGrid.getEcosystem(0,0).getInhabitants().get(3));
+     
+     predator.eat(myGrid.getEcosystem(0,0).getInhabitants().get(0));
+     
+     System.out.println(myGrid.getEcosystem(0,0).manifest());
+     predator.move();
+     System.out.println();
+     System.out.println(myGrid.getEcosystem(0,0).manifest());
+     System.out.println(myGrid.getEcosystem(0,1).manifest());
+     System.out.println(myGrid.getEcosystem(1,0).manifest());
+     System.out.println(myGrid.getEcosystem(1,1).manifest());
+     */
   }
 }

@@ -3,8 +3,18 @@ import java.io.*;
 class SpeciesTable{
   static Organism[] species;
   
+  public static String[] getOrganisms(){
+    String[] organisms = new String[species.length]; 
+    System.out.println(species.length);
+    for (int i=0;i<species.length;i++){
+      organisms[i]=species[i].getSpecies();
+    System.out.println(organisms[i]);
+    }
+    return organisms;
+  } 
+  
   SpeciesTable (){
-  species= new Organism[0]; 
+    species= new Organism[0]; 
   }
   
   public static Organism make (String name){
@@ -17,6 +27,7 @@ class SpeciesTable{
     try{
       OrganismLoader ol=  new OrganismLoader(name);//Create a new OrganismLoader
       Organism org = ol.read();
+      addOrganismToTable(org);
       return org;
       
     }catch (IOException e){
@@ -27,14 +38,14 @@ class SpeciesTable{
     }
   }
   
-  private void addOrganismToTable(Organism creature){
+  private static void addOrganismToTable(Organism creature){
     Organism[]newTable=new Organism[species.length+1];
     
     for(int i=0;i<species.length;i++){//Standard value copying for loop
       newTable[i]=species[i];
     }
     
-    newTable[newTable.length]=creature;
+    newTable[newTable.length-1]=creature;
     
     species=newTable;
   }

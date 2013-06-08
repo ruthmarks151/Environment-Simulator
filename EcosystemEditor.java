@@ -53,8 +53,9 @@ class EcosystemEditor extends JPanel implements ActionListener{
   //Action Event 
   public void actionPerformed(ActionEvent e){
     System.out.println("Action event");
-    
-    if (e.getSource().equals(saveButton)){
+    if(e.getSource().equals(addButton)){
+      new SpeciesAdder();
+    }else if (e.getSource().equals(saveButton)){
       for(PopulationRow pr:populationRows){
         int change;
         change=pr.getPopChange();
@@ -107,5 +108,26 @@ class PopulationRow extends JPanel {
     super.add(population,BorderLayout.EAST);
     setVisible(true);
   }
+  
+}
+
+/**********************************************************************************************************************/
+class SpeciesAdder extends JFrame {
+  private JComboBox species;
+  private JTextField population;
+
+  SpeciesAdder(){
+       super("Organism Packer");
+  SpeciesTable st=new SpeciesTable();
+  species=new JComboBox(st.getOrganisms());
+
+
+    super.add(species);
+    
+    super.pack();
+    super.setVisible(true);
+  
+  }  
+  
   
 }
