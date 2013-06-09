@@ -5,10 +5,8 @@ class SpeciesTable{
   
   public static String[] getOrganisms(){
     String[] organisms = new String[species.length]; 
-    System.out.println(species.length);
     for (int i=0;i<species.length;i++){
       organisms[i]=species[i].getSpecies();
-    System.out.println(organisms[i]);
     }
     return organisms;
   } 
@@ -17,6 +15,10 @@ class SpeciesTable{
     species= new Organism[0]; 
   }
   
+  public static void knownSpecies(){
+    for (int i=0;i<species.length;i++)
+      System.out.println(species[i].getSpecies());
+  }
   public static Organism make (String name){
     for (int i=0;i<species.length;i++){//Look Through the array of Organisms to see if one already exists with that name
       if (species[i].getSpecies().equals(name))
@@ -48,6 +50,8 @@ class SpeciesTable{
     newTable[newTable.length-1]=creature;
     
     species=newTable;
+    
+   
   }
   
 }

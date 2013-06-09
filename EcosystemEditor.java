@@ -24,20 +24,23 @@ class EcosystemEditor extends JPanel implements ActionListener{
     //Add 2 JButtons
     addButton=new JButton ("Add");
     saveButton=new JButton ("Save");
+    
     addButton.addActionListener(this);
     saveButton.addActionListener(this);
+    
     super.add(addButton);
     super.add(saveButton);  
     
     setVisible(true);}
   
-  void loadPops(){
+  public void loadPops(){
     String manifest=edited.manifest();//Gets the manifest from the ecosystem
     
     while (manifest.indexOf('\n')!=-1){//While there are still newlines in the string
       String line=manifest.substring(0,manifest.indexOf('\n'));//Get the first line of text  
       populationRows.add(new PopulationRow(line));//Add a population row to the arraylist
-      manifest=manifest.substring(manifest.indexOf('\n')+1,manifest.length());//Remove the line that was just processed from the string
+      //Remove the line that was just processed from the string
+      manifest=manifest.substring(manifest.indexOf('\n')+1,manifest.length());
     }
     
     for(PopulationRow pr:populationRows){//Add every population row to the panel
@@ -46,28 +49,33 @@ class EcosystemEditor extends JPanel implements ActionListener{
   }
   
   //Changes the population in the Ecosystem
-  private void populationChange(String secies,int change ){
-    
+  public void populationChange(String secies,int change ){
+    if (change>0)
+      edited.add(secies,change);
+    else
+      edited.remove(secies,Math.abs(change));
   }
   
+  private void checkForPopChanges(){
+    for(PopulationRow pr:populationRows){
+      int change;
+      change=pr.getPopChange();
+      populationChange(pr.getSpecies(),change);
+      
+    }
+  }
   //Action Event 
   public void actionPerformed(ActionEvent e){
-    System.out.println("Action event");
-    if(e.getSource().equals(addButton)){
-      new SpeciesAdder();
-    }else if (e.getSource().equals(saveButton)){
-      for(PopulationRow pr:populationRows){
-        int change;
-        change=pr.getPopChange();
-        if (change>0)
-          edited.add(pr.getSpecies(),change);
-        else
-          edited.remove(pr.getSpecies(),Math.abs(change));
-      }
-    }
     System.out.println(edited.manifest());
+    if(e.getSource().equals(addButton)){
+      new SpeciesAdder(this);
+    }else if (e.getSource().equals(saveButton)){
+      checkForPopChanges();    
+    }
   }
+  
 }
+
 
 /**********************************************************************************************************************/
 class PopulationRow extends JPanel {
@@ -84,9 +92,8 @@ class PopulationRow extends JPanel {
         change = Integer.parseInt(population.getText())-popInitial;//Get the change from the last initial value
         popInitial=Integer.parseInt(population.getText());//Set the initial
       }else 
-        throw new NumberFormatException();
-      
-    } catch (NumberFormatException e){//If the user did not enter a valid int
+        throw new NumberFormatException();} 
+    catch (NumberFormatException e){//If the user did not enter a valid int
       System.out.println("Number format!");
       population.setText(""+popInitial);//Reset the population field to the last valid value
       change=0;
@@ -112,22 +119,54 @@ class PopulationRow extends JPanel {
 }
 
 /**********************************************************************************************************************/
-class SpeciesAdder extends JFrame {
+class SpeciesAdder extends JFrame implements ActionListener{
   private JComboBox species;
   private JTextField population;
-
-  SpeciesAdder(){
-       super("Organism Packer");
-  SpeciesTable st=new SpeciesTable();
-  species=new JComboBox(st.getOrganisms());
-
-
-    super.add(species);
+  private JButton saveButton;
+  private EcosystemEditor parent;
+  
+  SpeciesAdder(EcosystemEditor editor){   
+    super("Organism Picker");
+    parent=editor;
+    
+    setLayout(new BorderLayout());
+    super.setPreferredSize(new Dimension(200,80));
+    
+    species=new JComboBox(SpeciesTable.getOrganisms());
+    population=new JTextField(0+"",3);
+    saveButton=new JButton ("Save");
+    
+    saveButton.addActionListener(this);
+    
+    super.add(species,BorderLayout.WEST);
+    super.add(population,BorderLayout.EAST);
+    super.add(saveButton,BorderLayout.SOUTH);
     
     super.pack();
     super.setVisible(true);
-  
+    
   }  
   
-  
+  public void actionPerformed(ActionEvent e){
+    String chosenSpecies=species.getSelectedItem().toString();
+    int chosenPop;
+      
+      try{  
+      if (Integer.parseInt(population.getText())>=0){      
+        chosenPop=Integer.parseInt(population.getText());
+        parent.populationChange(chosenSpecies,chosenPop);
+   parent.loadPops();
+        dispose();
+      }else 
+        throw new NumberFormatException();
+    }catch (NumberFormatException ex){//If the user did not enter a valid int
+      System.out.println("Number format!");
+      population.setText(""+0);//Reset the population field to the last valid value
+    }
+    
+    
+    
+    }
+    
+    
 }

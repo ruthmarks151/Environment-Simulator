@@ -22,6 +22,7 @@ class Simulation extends JPanel
     for(int i=0;i<1;i++)
       myGrid.getEcosystem(0,0).add(st.make("Bunny"));//Create 1 bunny
     
+    st.make("Bush");
     
     //Code to test ecosystem Editor
     JFrame jf=new JFrame("");
@@ -45,5 +46,6 @@ class Simulation extends JPanel
      System.out.println(myGrid.getEcosystem(1,0).manifest());
      System.out.println(myGrid.getEcosystem(1,1).manifest());
      */
+
   }
 }
