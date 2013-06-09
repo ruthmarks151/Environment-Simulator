@@ -12,10 +12,11 @@ class EcosystemEditor extends JPanel implements ActionListener{
   private MainWindow parent;
   
   public Ecosystem getEditted(){return edited;}
-  
+
   public void replace (){
-        System.out.println("Requesting Replacement");
-    parent.replaceMe(this);}
+    System.out.println("Requesting Replacement");
+    parent.refresh();
+  }
   
   EcosystemEditor(Ecosystem toBeEdited,MainWindow creator){
     //Variable management        

@@ -11,17 +11,17 @@ class Terrain
     Random r = new Random();
     do
     {
-    light = (int)Math.round(r.nextGaussian()*25)+50;
+    light = (int)Math.round(r.nextDouble()*25)+50;
     }
     while (light > 100 && light < 0);
     do
     {
-    water = (int)Math.round(r.nextGaussian()*25)+50;
+    water = (int)Math.round(r.nextDouble()*100);
     }
     while (water > 100 && water < 0);
     do
     {
-      temp = (int)Math.round(r.nextGaussian()*25)+50;
+      temp = (int)Math.round(r.nextDouble()*100);
     }
     while (temp > 100 && temp < 0);
   }

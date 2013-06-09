@@ -6,15 +6,16 @@ import java.awt.event.*;
 import java.util.*;
 
 
-class MainWindow extends JFrame{
+class MainWindow extends JFrame implements MouseListener{
   
   private  EcosystemEditor editor;
   private  Grid myGrid;
   
   MainWindow(Grid grid){
     super("Life Simulation");
- myGrid=grid;
-    editor=new EcosystemEditor(myGrid.getEcosystem(0,0),this);
+    myGrid=grid;
+    myGrid.setParent(this);
+    editor=new EcosystemEditor(myGrid.getSelected(),this);
     
     super.setPreferredSize(new Dimension(1024,768));
     super.setLayout(new BorderLayout());
@@ -26,17 +27,21 @@ class MainWindow extends JFrame{
   }
 
   
-  public  void replaceMe(EcosystemEditor caller){
-    if (caller==editor){
-      System.out.println("Replacing!");
+  public  void refresh(){
           super.remove(editor);
-      editor= new EcosystemEditor(editor.getEditted(),this);
+      editor= new EcosystemEditor(myGrid.getSelected(),this);
     super.add(editor,BorderLayout.EAST);
     super.repaint();
     super.pack();
     editor.setVisible(true);
     }
+  
+    //Mouse Listener Components
+  public void mousePressed(MouseEvent e){}
+  public void mouseReleased(MouseEvent e){} 
+  public void mouseEntered(MouseEvent e){} 
+  public void mouseExited(MouseEvent e){}
+  public void mouseClicked(MouseEvent e){}
     
   }
   
-}

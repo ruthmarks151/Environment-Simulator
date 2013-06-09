@@ -23,7 +23,7 @@ class Simulation extends JPanel
       myGrid.getEcosystem(0,0).add(st.make("Bunny"));//Create 1 bunny
     
     st.make("Bush");
-    System.out.println("New Window");
+
     new MainWindow(myGrid);
     
     //Code to test ecosystem Editor
