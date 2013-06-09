@@ -9,10 +9,18 @@ class EcosystemEditor extends JPanel implements ActionListener{
   private ArrayList<PopulationRow> populationRows;
   private JButton saveButton;
   private JButton addButton;
+  private MainWindow parent;
   
-  EcosystemEditor(Ecosystem toBeEdited){
+  public Ecosystem getEditted(){return edited;}
+  
+  public void replace (){
+        System.out.println("Requesting Replacement");
+    parent.replaceMe(this);}
+  
+  EcosystemEditor(Ecosystem toBeEdited,MainWindow creator){
     //Variable management        
     edited =toBeEdited;
+    parent=creator;
     populationRows=new ArrayList<PopulationRow>();
     
     //Layout Buisness
@@ -63,6 +71,10 @@ class EcosystemEditor extends JPanel implements ActionListener{
       populationChange(pr.getSpecies(),change);
       
     }
+    for(PopulationRow pr:populationRows){
+    if (pr.noPop())
+      replace();
+    }
   }
   //Action Event 
   public void actionPerformed(ActionEvent e){
@@ -101,6 +113,12 @@ class PopulationRow extends JPanel {
     return change;
   }    
   
+  public boolean noPop (){
+  if(population.getText().equals("0"))
+    return true;
+  return false;
+  }
+  
   PopulationRow(String line){
     String name=line.substring(0,(line.indexOf(":")));
     String number= line.substring((line.indexOf(":")+1),line.length());
@@ -115,6 +133,7 @@ class PopulationRow extends JPanel {
     super.add(population,BorderLayout.EAST);
     setVisible(true);
   }
+  
   
 }
 
@@ -133,6 +152,11 @@ class SpeciesAdder extends JFrame implements ActionListener{
     super.setPreferredSize(new Dimension(200,80));
     
     species=new JComboBox(SpeciesTable.getOrganisms());
+    
+    for (String str:SpeciesTable.getOrganisms()){
+    System.out.println(str);
+    }
+    
     population=new JTextField(0+"",3);
     saveButton=new JButton ("Save");
     
@@ -150,13 +174,13 @@ class SpeciesAdder extends JFrame implements ActionListener{
   public void actionPerformed(ActionEvent e){
     String chosenSpecies=species.getSelectedItem().toString();
     int chosenPop;
-      
-      try{  
+    
+    try{  
       if (Integer.parseInt(population.getText())>=0){      
         chosenPop=Integer.parseInt(population.getText());
         parent.populationChange(chosenSpecies,chosenPop);
-   parent.loadPops();
         dispose();
+        parent.replace();
       }else 
         throw new NumberFormatException();
     }catch (NumberFormatException ex){//If the user did not enter a valid int
@@ -166,7 +190,7 @@ class SpeciesAdder extends JFrame implements ActionListener{
     
     
     
-    }
-    
-    
+  }
+  
+  
 }

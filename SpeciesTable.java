@@ -1,7 +1,9 @@
 /**********************************************************************************************************************/
 import java.io.*;
 class SpeciesTable{
-  static Organism[] species;
+
+  
+  static Organism[] species=new Organism[0]; ;
   
   public static String[] getOrganisms(){
     String[] organisms = new String[species.length]; 
@@ -12,7 +14,6 @@ class SpeciesTable{
   } 
   
   SpeciesTable (){
-    species= new Organism[0]; 
   }
   
   public static void knownSpecies(){
