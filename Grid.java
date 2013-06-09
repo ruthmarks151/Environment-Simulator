@@ -1,5 +1,9 @@
 /**********************************************************************************************************************/
-class Grid
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+class Grid extends JPanel
 {
   private Ecosystem[][] map;
   
@@ -18,5 +22,13 @@ class Grid
         map[row][col]=new Ecosystem(this,row,col);//Declare each square as new ecosystem with 
       }}
   }
-
+  
+  @Override
+  protected void paintComponent(Graphics g) {
+    for(int row=0;row<map.length;row++){
+      for(int col=0;col<map[row].length;col++){    
+        g.drawImage(map[row][col].getImage(), row*32, col*32, null);} // see javadoc for more info on the parameters   
+      
+    }   
+  } 
 }

@@ -1,5 +1,9 @@
 /**********************************************************************************************************************/
 import java.util.*;
+import javax.imageio.*; // allows image loading
+import javax.swing.*;
+import java.io.*; // allows file access
+import java.awt.Image;
 
 class Ecosystem
 {
@@ -7,6 +11,7 @@ class Ecosystem
   Terrain habitat;
   int row, col;
   Grid parent;
+  Image mapSquare;
   //Getters
   public ArrayList<Organism> getInhabitants() {return inhabitants;}
   public int getRow(){return row;}
@@ -18,12 +23,7 @@ class Ecosystem
     col=y;
     
     habitat = new Terrain();
-    inhabitants = new ArrayList<Organism>();
-  }
-  
-  public Ecosystem ()
-  {
-    habitat = new Terrain();
+    mapSquare=loadImage(habitat.type());
     inhabitants = new ArrayList<Organism>();
   }
   
@@ -96,11 +96,7 @@ class Ecosystem
     
     return manifest;  
     
-  }
-  
-  
-  
-  
+  } 
   
   public void update ()
   {
@@ -114,4 +110,25 @@ class Ecosystem
        }*/
     }
   }
+  
+  public Image getImage (){
+  return mapSquare;
+  }
+  public Image loadImage (String name)  //loads image from file
+  {
+    Image img = null;
+    try
+    {
+      img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
+      
+
+    }
+    catch (IOException e)
+    {
+      System.out.println("Image load error"+"\n"+"images/" + name + ".png");
+    }
+    
+    return img;
+  }
+  
 }

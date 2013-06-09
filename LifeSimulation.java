@@ -13,7 +13,7 @@ class Simulation extends JPanel
   public static void main(String[] args){
     
     //Declare a new grid   
-    myGrid=new Grid(3,3);
+    myGrid=new Grid(23,18);
     
 //Make the species table
     SpeciesTable st=new SpeciesTable();
@@ -24,7 +24,7 @@ class Simulation extends JPanel
     
     st.make("Bush");
     System.out.println("New Window");
-    new MainWindow();
+    new MainWindow(myGrid);
     
     //Code to test ecosystem Editor
     /*

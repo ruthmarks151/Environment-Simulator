@@ -11,24 +11,15 @@ class MainWindow extends JFrame{
   private  EcosystemEditor editor;
   private  Grid myGrid;
   
-  MainWindow(){
+  MainWindow(Grid grid){
     super("Life Simulation");
-    //////////
-        myGrid=new Grid(3,3);
-    
-
-    for(int i=0;i<3;i++)
-      myGrid.getEcosystem(0,0).add(SpeciesTable.make("Fern"));//Create 3 fern
-    for(int i=0;i<1;i++)
-      myGrid.getEcosystem(0,0).add(SpeciesTable.make("Bunny"));//Create 1 bunny
-    
-    SpeciesTable.make("Bush");
-    //////////
+ myGrid=grid;
     editor=new EcosystemEditor(myGrid.getEcosystem(0,0),this);
     
     super.setPreferredSize(new Dimension(1024,768));
     super.setLayout(new BorderLayout());
     
+    super.add(myGrid,BorderLayout.CENTER);  
     super.add(editor,BorderLayout.EAST);  
     super.pack();
     super.setVisible(true);

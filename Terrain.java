@@ -26,6 +26,24 @@ class Terrain
     while (temp > 100 && temp < 0);
   }
   
+  //This needs to get tuned Right now it spews random junk
+  public String type(){
+    if (water>80)
+      return "Water";
+    if(water>40){
+      if(light>80)
+        return "Short Grass";
+      if (light>50)
+        return "Tall Grass";
+      if (light>20)
+        return "Young Forest";
+      return "Mature Forest";
+    }
+    if (water<30)
+      return "Sand";
+    return "Dirt";
+  }
+  
   //Initialize the Environment with given constructors
   public Terrain (int lite, int h20, int temperature)
   {
