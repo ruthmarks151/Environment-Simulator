@@ -17,11 +17,10 @@ class Simulation extends JPanel
     
 //Make the species table
     SpeciesTable st=new SpeciesTable();
-    for(int i=0;i<3;i++)
-      myGrid.getEcosystem(0,0).add(st.make("Fern"));//Create 3 fern
-    for(int i=0;i<1;i++)
-      myGrid.getEcosystem(0,0).add(st.make("Bunny"));//Create 1 bunny
-    
+ 
+//Teach the species table the species that exist
+    st.make("Fern");//Create a fern
+    st.make("Bunny");//Create a bunny
     st.make("Bush");
 
     new MainWindow(myGrid);

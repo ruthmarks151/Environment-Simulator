@@ -80,9 +80,12 @@ class OrganismLoader{
       return new Plant(species,foodValue,lives,photosynthesis);
     }
     PreferenceTable eats;
+    int successAtHunting;
+    int successAtEvasion;
     eats=ptLoad("Eats");
-    
-    return new Animal (species,foodValue,lives,eats);//Temporary return type
+    successAtHunting=readIntLine(); 
+    successAtEvasion=readIntLine(); 
+    return new Animal (species,foodValue,lives,eats,successAtHunting,successAtEvasion);//Temporary return type
   }
 }
 

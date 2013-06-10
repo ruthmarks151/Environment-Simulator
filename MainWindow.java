@@ -13,6 +13,7 @@ class MainWindow extends JFrame implements MouseListener{
   
   MainWindow(Grid grid){
     super("Life Simulation");
+    super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myGrid=grid;
     myGrid.setParent(this);
     editor=new EcosystemEditor(myGrid.getSelected(),this);

@@ -7,6 +7,13 @@ class PreferenceTable{
     prefered=new String[0];
     preference=new int[0];
   }
+  public int getPrefFor(String thing){
+    for (int i=0;i<prefered.length;i++){
+      if(prefered[i].equals(thing))
+        return preference[i];}
+    return 0;
+  }
+  
   public void add(String line){
     String name=line.substring(0,(line.indexOf(":")-1));
     String number= line.substring((line.indexOf(":")+1),line.length());

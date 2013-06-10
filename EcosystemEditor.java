@@ -168,6 +168,8 @@ class SpeciesAdder extends JFrame implements ActionListener{
     super.add(saveButton,BorderLayout.SOUTH);
     
     super.pack();
+
+    this.setLocation(1024/2-this.getSize().width/2, 768/2-this.getSize().height/2);
     super.setVisible(true);
     
   }  
