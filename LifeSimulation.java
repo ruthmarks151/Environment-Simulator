@@ -1,10 +1,13 @@
 /**********************************************************************************************************************/
 import javax.swing.*;
 import java.io.*;
+import java.awt.event.*;
 
 class Simulation extends JPanel
 {
+  private static Movement moveGrid;
   private static Grid myGrid;
+  private static Timer t;
   
   //Getters
   public static Grid getGrid(){return myGrid;}
@@ -24,6 +27,12 @@ class Simulation extends JPanel
     st.make("Bush");
 
     new MainWindow(myGrid);
+    
+    moveGrid = new Movement (myGrid);
+    
+    t = new Timer (1000, moveGrid);
+    
+    t.start();
     
     //Code to test ecosystem Editor
     /*

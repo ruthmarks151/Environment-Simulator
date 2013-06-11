@@ -20,6 +20,7 @@ class Grid extends JPanel implements MouseListener
   public int getCols() {return map[0].length;}
   public Ecosystem getEcosystem(int x,int y){return map[x][y];}
   public Ecosystem getSelected(){return map[selectedRow][selectedCol];} 
+  public MainWindow getParent() {return parent;}
   
   //Setters
   public void setParent(MainWindow mainWin){parent=mainWin;}
@@ -36,7 +37,18 @@ class Grid extends JPanel implements MouseListener
       }}
     addMouseListener(this);
   }
- 
+  
+  public void advance ()
+  {
+    for (Ecosystem[] line: map)
+    {
+      for (Ecosystem block: line)
+      {
+        block.advance();
+      }
+    }
+  }
+  
   //Graphics
   @Override
   protected void paintComponent(Graphics g) {
@@ -55,7 +67,7 @@ class Grid extends JPanel implements MouseListener
     {
       img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
       
-
+      
     }
     catch (IOException e)
     {
@@ -67,9 +79,9 @@ class Grid extends JPanel implements MouseListener
   //Mouse Listener Components
   public void mousePressed(MouseEvent e){
     selectedRow=e.getX()/32;
-  selectedCol=e.getY()/32;
-  repaint();
-  parent.refresh();
+    selectedCol=(e.getY()-32)/32;//This is a patch to fix weird errors in windows XP
+    repaint();
+    parent.refresh();
   }
   public void mouseReleased(MouseEvent e){} 
   public void mouseEntered(MouseEvent e){} 

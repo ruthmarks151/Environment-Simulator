@@ -50,14 +50,11 @@ abstract class Organism
 
   public ArrayList<Ecosystem> getAdjacent() {return parent.getAdjacent();}
   
-  public void act(Ecosystem habitat)
-
-  {
-    
-  }
-  
   public void act(){
-  
+    energy--;
+    if (energy <= 0) {
+      die();
+    }
   }
   
   public void die()
@@ -69,13 +66,14 @@ abstract class Organism
   {
     if (Math.random() < reproductiveSuccess)
     {
-      try
-      {
-      Class species = getClass();
-      parent.add((Organism) species.newInstance());
-      }
-      catch (InstantiationException iex) {}
-      catch (IllegalAccessException iaex) {}
+      //try
+      //{
+      //Class species = getClass();
+      //parent.add((Organism) species.newInstance());
+        parent.add(SpeciesTable.make(getSpecies()));
+      //}
+      //catch (InstantiationException iex) {}
+      //catch (IllegalAccessException iaex) {}
     }
   }
   

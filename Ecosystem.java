@@ -41,6 +41,14 @@ class Ecosystem
     return neighbours;
   }
   
+  public void advance ()
+  {
+    for (int i = 0; i < inhabitants.size(); i++)
+    {
+      inhabitants.get(i).act();
+    }
+  }
+  
   public void add (Organism baby)
   {
     baby.setParent(this);
@@ -97,19 +105,6 @@ class Ecosystem
     return manifest;  
     
   } 
-  
-  public void update ()
-  {
-    for (Organism lifeform : inhabitants)
-    {
-      lifeform.act();
-      //I think we want to implement this at the lifeform level rather than here
-      /*if (lifeform.getClass().isAssignableFrom(Animal.class) && (int) Math.random() * 100 < ((Animal) lifeform).getMobility())
-       {
-       //remove(lifeform);
-       }*/
-    }
-  }
   
   public Image getImage (){
   return mapSquare;
