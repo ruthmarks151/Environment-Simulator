@@ -40,14 +40,14 @@ class Animal extends Organism
     setParent (newparent);
   }
   
-  public void act ()
+  public boolean act ()
   {
     Organism prey = pickPrey();
     if (prey != null)
       eat (prey);
     if (Math.random () * 100 < mobility)
       move();
-    super.act();
+    return super.act();
   }
   
   public void hunt (Organism other)

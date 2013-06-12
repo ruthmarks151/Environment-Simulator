@@ -36,6 +36,8 @@ class Grid extends JPanel implements MouseListener
         map[row][col]=new Ecosystem(this,row,col);//Declare each square as new ecosystem with 
       }}
     addMouseListener(this);
+    
+        super.setPreferredSize(new Dimension(c*32,r*32));
   }
   
   public void advance ()

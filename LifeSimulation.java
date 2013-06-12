@@ -11,7 +11,7 @@ class Simulation extends JPanel
   
   //Getters
   public static Grid getGrid(){return myGrid;}
-  
+  public static Timer timer(){return t;}
   //Main
   public static void main(String[] args){
     
@@ -32,7 +32,7 @@ class Simulation extends JPanel
     
     t = new Timer (1000, moveGrid);
     
-    t.start();
+    //t.start();
     
     //Code to test ecosystem Editor
     /*

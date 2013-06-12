@@ -9,6 +9,7 @@ class EcosystemEditor extends JPanel implements ActionListener{
   private ArrayList<PopulationRow> populationRows;
   private JButton saveButton;
   private JButton addButton;
+  private SpeciesAdder sa;
   private MainWindow parent;
   
   public Ecosystem getEditted(){return edited;}
@@ -36,7 +37,10 @@ class EcosystemEditor extends JPanel implements ActionListener{
     
     addButton.addActionListener(this);
     saveButton.addActionListener(this);
-    
+    //Declare a species adder
+     sa = new SpeciesAdder(this);
+      
+     super.add(sa);//add it
     super.add(addButton);
     super.add(saveButton);  
     
@@ -81,11 +85,28 @@ class EcosystemEditor extends JPanel implements ActionListener{
   public void actionPerformed(ActionEvent e){
     System.out.println(edited.manifest());
     if(e.getSource().equals(addButton)){
-      new SpeciesAdder(this);
+      
+      String chosenSpecies=sa.species.getSelectedItem().toString();
+    int chosenPop;
+    
+    try{  
+      if (Integer.parseInt(sa.population.getText())>=0){      
+        chosenPop=Integer.parseInt(sa.population.getText());
+        populationChange(chosenSpecies,chosenPop);
+        replace();
+      }else 
+        throw new NumberFormatException();
+    }catch (NumberFormatException ex){//If the user did not enter a valid int
+      System.out.println("Number format!");
+      sa.population.setText(""+0);//Reset the population field to the last valid value
+    }
+      
     }else if (e.getSource().equals(saveButton)){
       checkForPopChanges();    
     }
   }
+  
+  
   
 }
 
@@ -139,61 +160,33 @@ class PopulationRow extends JPanel {
 }
 
 /**********************************************************************************************************************/
-class SpeciesAdder extends JFrame implements ActionListener{
-  private JComboBox species;
-  private JTextField population;
-  private JButton saveButton;
+class SpeciesAdder extends JPanel{
+  public JComboBox species;
+  public JTextField population;
   private EcosystemEditor parent;
   
   SpeciesAdder(EcosystemEditor editor){   
-    super("Organism Picker");
+    super();
     parent=editor;
     
     setLayout(new BorderLayout());
-    super.setPreferredSize(new Dimension(200,80));
+    super.setPreferredSize(new Dimension(200,30));
     
     species=new JComboBox(SpeciesTable.getOrganisms());
     
     for (String str:SpeciesTable.getOrganisms()){
-    System.out.println(str);
+
     }
     
     population=new JTextField(0+"",3);
-    saveButton=new JButton ("Save");
     
-    saveButton.addActionListener(this);
     
     super.add(species,BorderLayout.WEST);
     super.add(population,BorderLayout.EAST);
-    super.add(saveButton,BorderLayout.SOUTH);
-    
-    super.pack();
-
-    this.setLocation(1024/2-this.getSize().width/2, 768/2-this.getSize().height/2);
+ 
     super.setVisible(true);
     
   }  
-  
-  public void actionPerformed(ActionEvent e){
-    String chosenSpecies=species.getSelectedItem().toString();
-    int chosenPop;
-    
-    try{  
-      if (Integer.parseInt(population.getText())>=0){      
-        chosenPop=Integer.parseInt(population.getText());
-        parent.populationChange(chosenSpecies,chosenPop);
-        dispose();
-        parent.replace();
-      }else 
-        throw new NumberFormatException();
-    }catch (NumberFormatException ex){//If the user did not enter a valid int
-      System.out.println("Number format!");
-      population.setText(""+0);//Reset the population field to the last valid value
-    }
-    
-    
-    
-  }
   
   
 }

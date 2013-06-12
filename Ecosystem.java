@@ -45,7 +45,8 @@ class Ecosystem
   {
     for (int i = 0; i < inhabitants.size(); i++)
     {
-      inhabitants.get(i).act();
+      if (inhabitants.get(i).act())
+        i--;
     }
   }
   

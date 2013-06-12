@@ -20,7 +20,7 @@ abstract class Organism
   public int getFoodValue(){return foodValue;}
   public Ecosystem getParent(){return parent;}
   public int getEnergy(){return energy;}
-  public void addEnergy (int food){energy += food;}
+  public void addEnergy (int food){energy = energy + food;}
   
   
 //Setters
@@ -50,15 +50,19 @@ abstract class Organism
 
   public ArrayList<Ecosystem> getAdjacent() {return parent.getAdjacent();}
   
-  public void act(){
+  public boolean act(){
     energy--;
     if (energy <= 0) {
+                System.out.println("Something died! E="+energy);
       die();
+      return true;
     }
+    return false;
   }
   
   public void die()
   {
+
     parent.remove(this);
   }
   

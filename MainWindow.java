@@ -10,19 +10,22 @@ class MainWindow extends JFrame implements MouseListener{
   
   private  EcosystemEditor editor;
   private  Grid myGrid;
-  
+  private ControlBar controls;
   MainWindow(Grid grid){
     super("Life Simulation");
     super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     myGrid=grid;
     myGrid.setParent(this);
     editor=new EcosystemEditor(myGrid.getSelected(),this);
-    
+    controls=new ControlBar(this);
+      
     super.setPreferredSize(new Dimension(1024,768));
     super.setLayout(new BorderLayout());
     
     super.add(myGrid,BorderLayout.CENTER);  
     super.add(editor,BorderLayout.EAST);  
+    super.add(controls,BorderLayout.SOUTH);  
+    
     super.pack();
     super.setVisible(true);
   }

@@ -20,11 +20,15 @@ class Plant extends Organism
     photosynthesisSuccess=photoSynthesisRequirements;
   }
   
-  public void act ()
+  public boolean act ()
   {
-    if (Math.random() * 100 < photosynthesisSuccess)
-      photosynthesize();
-    super.act();
+    int rand =(int)(Math.random() * 100);
+    if (rand < photosynthesisSuccess){
+      System.out.println(rand+"<"+photosynthesisSuccess);
+      photosynthesize();}
+    else 
+            System.out.println(rand+">"+photosynthesisSuccess);
+    return super.act();
   }
   
   public void photosynthesize ()
