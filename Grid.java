@@ -9,10 +9,10 @@ import java.io.*;
 
 class Grid extends JPanel implements MouseListener
 {
-  private Ecosystem[][] map;
-  private int selectedRow,selectedCol;
-  private Image selector; 
-  private MainWindow parent=null;
+  protected Ecosystem[][] map;
+  protected int selectedRow,selectedCol;
+  protected Image selector; 
+  protected MainWindow parent=null;
   
 //Getters
   public Ecosystem[][] getMap (){return map;}

@@ -8,9 +8,10 @@ import java.util.*;
 
 class MainWindow extends JFrame implements MouseListener{
   
-  private  EcosystemEditor editor;
-  private  Grid myGrid;
-  private ControlBar controls;
+  protected  EcosystemEditor editor;
+  protected  Grid myGrid;
+  protected ControlBar controls;
+  
   MainWindow(Grid grid){
     super("Life Simulation");
     super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,7 +20,7 @@ class MainWindow extends JFrame implements MouseListener{
     editor=new EcosystemEditor(myGrid.getSelected(),this);
     controls=new ControlBar(this);
       
-    super.setPreferredSize(new Dimension(1024,768));
+    super.setPreferredSize(new Dimension(720,720));
     super.setLayout(new BorderLayout());
     
     super.add(myGrid,BorderLayout.CENTER);  

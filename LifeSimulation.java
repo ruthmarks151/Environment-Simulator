@@ -16,7 +16,7 @@ class Simulation extends JPanel
   public static void main(String[] args){
     
     //Declare a new grid   
-    myGrid=new Grid(23,18);
+    myGrid=new Grid(16,16);
     
 //Make the species table
     SpeciesTable st=new SpeciesTable();

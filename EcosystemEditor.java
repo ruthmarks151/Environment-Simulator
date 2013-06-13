@@ -8,12 +8,12 @@ class EcosystemEditor extends JPanel implements ActionListener{
   private Ecosystem edited;
   private ArrayList<PopulationRow> populationRows;
   private JButton saveButton;
-  private JButton addButton;
+  
   private SpeciesAdder sa;
   private MainWindow parent;
   
   public Ecosystem getEditted(){return edited;}
-
+  
   public void replace (){
     System.out.println("Requesting Replacement");
     parent.refresh();
@@ -26,22 +26,20 @@ class EcosystemEditor extends JPanel implements ActionListener{
     populationRows=new ArrayList<PopulationRow>();
     
     //Layout Buisness
-    super.setPreferredSize(new Dimension(240,768));
+    super.setPreferredSize(new Dimension(202,720));
     setLayout(new FlowLayout());
     
     loadPops();
     
     //Add 2 JButtons
-    addButton=new JButton ("Add");
     saveButton=new JButton ("Save");
     
-    addButton.addActionListener(this);
     saveButton.addActionListener(this);
     //Declare a species adder
-     sa = new SpeciesAdder(this);
-      
-     super.add(sa);//add it
-    super.add(addButton);
+    sa = new SpeciesAdder(this);
+    
+    super.add(sa);//add it
+    
     super.add(saveButton);  
     
     setVisible(true);}
@@ -77,16 +75,15 @@ class EcosystemEditor extends JPanel implements ActionListener{
       
     }
     for(PopulationRow pr:populationRows){
-    if (pr.noPop())
-      replace();
+      if (pr.noPop())
+        replace();
     }
   }
   //Action Event 
   public void actionPerformed(ActionEvent e){
-    System.out.println(edited.manifest());
-    if(e.getSource().equals(addButton)){
-      
-      String chosenSpecies=sa.species.getSelectedItem().toString();
+    //Adding from the row
+    
+    String chosenSpecies=sa.species.getSelectedItem().toString();
     int chosenPop;
     
     try{  
@@ -100,10 +97,10 @@ class EcosystemEditor extends JPanel implements ActionListener{
       System.out.println("Number format!");
       sa.population.setText(""+0);//Reset the population field to the last valid value
     }
-      
-    }else if (e.getSource().equals(saveButton)){
-      checkForPopChanges();    
-    }
+    
+    //Check for pop changes
+    checkForPopChanges();    
+    
   }
   
   
@@ -136,9 +133,9 @@ class PopulationRow extends JPanel {
   }    
   
   public boolean noPop (){
-  if(population.getText().equals("0"))
-    return true;
-  return false;
+    if(population.getText().equals("0"))
+      return true;
+    return false;
   }
   
   PopulationRow(String line){
@@ -147,7 +144,7 @@ class PopulationRow extends JPanel {
     popInitial=Integer.parseInt(number);
     
     setLayout(new BorderLayout());
-    super.setPreferredSize(new Dimension(200,30));
+    super.setPreferredSize(new Dimension(202,30));
     species=new JLabel(name);
     population=new JTextField(popInitial+"",3);
     
@@ -170,12 +167,12 @@ class SpeciesAdder extends JPanel{
     parent=editor;
     
     setLayout(new BorderLayout());
-    super.setPreferredSize(new Dimension(200,30));
+    super.setPreferredSize(new Dimension(202,30));
     
     species=new JComboBox(SpeciesTable.getOrganisms());
     
     for (String str:SpeciesTable.getOrganisms()){
-
+      
     }
     
     population=new JTextField(0+"",3);
@@ -183,7 +180,7 @@ class SpeciesAdder extends JPanel{
     
     super.add(species,BorderLayout.WEST);
     super.add(population,BorderLayout.EAST);
- 
+    
     super.setVisible(true);
     
   }  

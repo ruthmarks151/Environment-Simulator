@@ -3,7 +3,7 @@ import java.awt.event.*;
 class Movement implements ActionListener
 {
   // data field colony, which is affected each time
-  private Grid grid;
+  protected Grid grid;
   
   // constructor sets the object's colony to the inputted colony
   public Movement (Grid thegrid)

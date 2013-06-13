@@ -7,11 +7,11 @@ import java.io.*;
 
 abstract class Organism
 {
-  private static int foodValue, reproductiveSuccess;
-  private int energy;
-  private String species;
-  private Ecosystem parent;
-  private PreferenceTable habitats; 
+  protected static int foodValue, reproductiveSuccess;
+  protected int energy;
+  protected String species;
+  protected Ecosystem parent;
+  protected PreferenceTable habitats; 
   
   //Getters
   public int getRow(){return parent.getRow();}
@@ -42,7 +42,8 @@ abstract class Organism
   {
     species=createAs;
     foodValue=foodPointValue;
-    habitats=placesToLive;   
+    habitats=placesToLive; 
+    energy=3;
     
   }
   //Other methods
