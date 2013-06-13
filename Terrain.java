@@ -30,7 +30,7 @@ class Terrain
   
   //This needs to get tuned Right now it spews random junk
   public String type(){
-    if (water>80)
+    if (water>75)
       return "Water";
     if(water>40){
       if(light>80)
