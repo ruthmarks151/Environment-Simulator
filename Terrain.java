@@ -5,9 +5,11 @@ class Terrain
   protected int light; //sd 25, mean 50, min 0, max 100
   protected int water; //same as light
   protected int temp; //same
-  
-  public Terrain ()
+  protected Ecosystem parent;
+  public Terrain (Ecosystem creator)
   {
+    parent=creator;
+    
     Random r = new Random();
     do
     {

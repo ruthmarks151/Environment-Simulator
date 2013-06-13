@@ -22,7 +22,7 @@ class Ecosystem
     row=x;
     col=y;
     
-    habitat = new Terrain();
+    habitat = new Terrain(this);
     mapSquare=loadImage(habitat.type());
     inhabitants = new ArrayList<Organism>();
   }
