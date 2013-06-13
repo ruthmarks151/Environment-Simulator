@@ -23,7 +23,7 @@ class SpeciesTable{
   public static Organism make (String name){
     for (int i=0;i<species.length;i++){//Look Through the array of Organisms to see if one already exists with that name
       if (species[i].getSpecies().equals(name))
-        return species[i];//If it has the requested name return it
+        return species[i].clone();//If it has the requested name return it
     }
     
     //The organism with the requested name must not exist

@@ -70,22 +70,26 @@ class OrganismLoader{
     int foodValue;
     PreferenceTable lives;
     String type;
+    int reproductiveSuccess;
     
     species=readLine();
     foodValue=readIntLine();
-    lives=ptLoad("Lives");   
+    lives=ptLoad("Lives");
+    reproductiveSuccess = readIntLine();
     type=readLine();
     if (type.equals("Plant")){
       int photosynthesis=readIntLine(); 
-      return new Plant(species,foodValue,lives,photosynthesis);
+      return new Plant(species,foodValue,lives,reproductiveSuccess,photosynthesis);
     }
     PreferenceTable eats;
     int successAtHunting;
     int successAtEvasion;
+    int agility;
     eats=ptLoad("Eats");
     successAtHunting=readIntLine(); 
     successAtEvasion=readIntLine(); 
-    return new Animal (species,foodValue,lives,eats,successAtHunting,successAtEvasion);//Temporary return type
+    agility= readIntLine();
+    return new Animal (species,foodValue,lives,reproductiveSuccess,eats,successAtHunting,successAtEvasion, agility);//Temporary return type
   }
 }
 

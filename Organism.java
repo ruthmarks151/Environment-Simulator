@@ -5,7 +5,7 @@ import java.lang.Comparable;
 import java.io.*;
 
 
-abstract class Organism
+abstract class Organism implements Cloneable
 {
   protected static int foodValue, reproductiveSuccess;
   protected int energy;
@@ -21,6 +21,8 @@ abstract class Organism
   public Ecosystem getParent(){return parent;}
   public int getEnergy(){return energy;}
   public void addEnergy (int food){energy = energy + food;}
+  public PreferenceTable getHabitats() {return habitats;}
+  public int getReproductiveSuccess() {return reproductiveSuccess;}
   
   
 //Setters
@@ -36,7 +38,7 @@ abstract class Organism
     
   }
   
-    public Organism (String createAs,int foodPointValue,PreferenceTable placesToLive)
+    public Organism (String createAs,int foodPointValue,PreferenceTable placesToLive, int reproduction)
 
     //createAs the species of the organism.
   {
@@ -44,6 +46,7 @@ abstract class Organism
     foodValue=foodPointValue;
     habitats=placesToLive; 
     energy=3;
+    reproductiveSuccess = reproduction;
     
   }
   //Other methods
@@ -53,8 +56,8 @@ abstract class Organism
   
   public boolean act(){
     energy--;
+    reproduce();
     if (energy <= 0) {
-                System.out.println("Something died! E="+energy);
       die();
       return true;
     }
@@ -63,23 +66,17 @@ abstract class Organism
   
   public void die()
   {
-
     parent.remove(this);
   }
   
   public void reproduce()
   {
-    if (Math.random() < reproductiveSuccess)
-    {
-      //try
-      //{
-      //Class species = getClass();
-      //parent.add((Organism) species.newInstance());
-        parent.add(SpeciesTable.make(getSpecies()));
-      //}
-      //catch (InstantiationException iex) {}
-      //catch (IllegalAccessException iaex) {}
-    }
+    parent.add(SpeciesTable.make(getSpecies()));
+  }
+  
+  public Organism clone()
+  {
+      return this.clone();
   }
   
   
