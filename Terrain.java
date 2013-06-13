@@ -30,6 +30,24 @@ class Terrain
   
   //This needs to get tuned Right now it spews random junk
   public String type(){
+    int row = parent.getRow();
+    int col = parent.getCol();
+    if (row == 0 && col == 0){
+    if (water>80)
+      return "Water";
+    if(water>40){
+      if(light>80)
+        return "Short Grass";
+      if (light>50)
+        return "Tall Grass";
+      if (light>20)
+        return "Young Forest";
+      return "Mature Forest";
+    }
+    if (water<30 && temp > 60)
+      return "Sand";
+    return "Dirt";
+    }
     if (water>75)
       return "Water";
     if(water>40){
@@ -41,7 +59,7 @@ class Terrain
         return "Young Forest";
       return "Mature Forest";
     }
-    if (water<30)
+    if (water<30 && temp > 60)
       return "Sand";
     return "Dirt";
   }
