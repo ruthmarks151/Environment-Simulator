@@ -5,9 +5,9 @@ import java.lang.Comparable;
 import java.io.*;
 
 
-abstract class Organism
+class Organism implements Cloneable
 {
-  private static int foodValue, reproductiveSuccess;
+  public static int foodValue, reproductiveSuccess;
   private int energy;
   private String species;
   private Ecosystem parent;
@@ -20,7 +20,9 @@ abstract class Organism
   public int getFoodValue(){return foodValue;}
   public Ecosystem getParent(){return parent;}
   public int getEnergy(){return energy;}
-  public void addEnergy (int food){energy = energy + food;}
+  public void addEnergy (int food){energy += food;}
+  public PreferenceTable getHabitats(){return habitats;}
+  public int getReproductiveSuccess() {return reproductiveSuccess;}
   
   
 //Setters
@@ -33,16 +35,19 @@ abstract class Organism
   {
     parent=eco;
     species=createAs;
+    energy=5;
     
   }
   
-    public Organism (String createAs,int foodPointValue,PreferenceTable placesToLive)
+    public Organism (String createAs,int foodPointValue,PreferenceTable placesToLive, int reproduction)
 
     //createAs the species of the organism.
   {
     species=createAs;
     foodValue=foodPointValue;
-    habitats=placesToLive;   
+    habitats=placesToLive;
+    reproductiveSuccess=reproduction;
+    energy = 5;
     
   }
   //Other methods
@@ -52,6 +57,7 @@ abstract class Organism
   
   public boolean act(){
     energy--;
+    reproduce();
     if (energy <= 0) {
                 System.out.println("Something died! E="+energy);
       die();
@@ -68,7 +74,6 @@ abstract class Organism
   
   public void reproduce()
   {
-    if (Math.random() < reproductiveSuccess)
     {
       //try
       //{
@@ -81,6 +86,14 @@ abstract class Organism
     }
   }
   
+  public Organism clone()
+  {
+    try{return (Organism) super.clone();}
+    catch (CloneNotSupportedException ex) {
+      System.out.println("Cloning failed");
+      return null;
+    }
+  }
   
 }
 

@@ -67,17 +67,18 @@ class OrganismLoader{
   
   public Organism read() throws IOException{
     String species;
-    int foodValue;
+    int foodValue, reproductiveSuccess;
     PreferenceTable lives;
     String type;
     
     species=readLine();
     foodValue=readIntLine();
-    lives=ptLoad("Lives");   
+    lives=ptLoad("Lives");
+    reproductiveSuccess = readIntLine();
     type=readLine();
     if (type.equals("Plant")){
       int photosynthesis=readIntLine(); 
-      return new Plant(species,foodValue,lives,photosynthesis);
+      return new Plant(species,foodValue,lives,reproductiveSuccess,photosynthesis);
     }
     PreferenceTable eats;
     int successAtHunting;
@@ -85,7 +86,7 @@ class OrganismLoader{
     eats=ptLoad("Eats");
     successAtHunting=readIntLine(); 
     successAtEvasion=readIntLine(); 
-    return new Animal (species,foodValue,lives,eats,successAtHunting,successAtEvasion);//Temporary return type
+    return new Animal (species,foodValue,lives,eats,reproductiveSuccess,successAtHunting,successAtEvasion);//Temporary return type
   }
 }
 

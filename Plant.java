@@ -3,6 +3,8 @@ class Plant extends Organism
 {
   private static int photosynthesisSuccess;
   
+  public int getPhotosynthesisSuccess() {return photosynthesisSuccess;}
+  
   Plant (Ecosystem eco,String createAs)
     //eco, THe ecoystem the organism lives in. 
     //createAs the species of the organism.
@@ -14,10 +16,11 @@ class Plant extends Organism
   Plant(String createAs,
         int foodPointValue,
         PreferenceTable placesToLive,
-        int photoSynthesisRequirements){
+        int reproduction,
+        int photosynthesisRequirements){
     
-    super(createAs,foodPointValue,placesToLive);
-    photosynthesisSuccess=photoSynthesisRequirements;
+    super(createAs,foodPointValue,placesToLive,reproduction);
+    photosynthesisSuccess=photosynthesisRequirements;
   }
   
   public boolean act ()
@@ -34,5 +37,25 @@ class Plant extends Organism
   public void photosynthesize ()
   {
       addEnergy(1);
+  }
+  
+  public void reproduce ()
+  {
+    if (Math.random() * 100 < reproductiveSuccess)
+      super.reproduce();
+  }
+  
+  public Organism clone ()
+  {
+    String createAs = getSpecies();
+    int foodPointValue = getFoodValue();
+    PreferenceTable placesToLive = getHabitats();
+    int reproduction = getReproductiveSuccess();
+    int photosynthesisRequirements = getPhotosynthesisSuccess();
+    return new Plant(createAs,
+        foodPointValue,
+        placesToLive,
+        reproduction,
+        photosynthesisRequirements);
   }
 }

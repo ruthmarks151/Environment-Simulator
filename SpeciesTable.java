@@ -11,7 +11,7 @@ class SpeciesTable{
       organisms[i]=species[i].getSpecies();
     }
     return organisms;
-  } 
+  }
   
   SpeciesTable (){
   }
@@ -23,7 +23,11 @@ class SpeciesTable{
   public static Organism make (String name){
     for (int i=0;i<species.length;i++){//Look Through the array of Organisms to see if one already exists with that name
       if (species[i].getSpecies().equals(name))
-        return species[i];//If it has the requested name return it
+      {
+        Organism newlifeform = (Organism) species[i].clone();
+        System.out.println("Returning a " + newlifeform.getSpecies());
+        return newlifeform;
+      }
     }
     
     //The organism with the requested name must not exist

@@ -1,7 +1,7 @@
 /**********************************************************************************************************************/
 import java.util.*;
 
-class Animal extends Organism
+class Animal extends Organism implements Cloneable
 {
   private static ArrayList<Organism> foodSources;
   private static int mobility;
@@ -11,6 +11,7 @@ class Animal extends Organism
   //Getters
   public int getEvasionSuccess() {return evasionSuccess;}
   public int getMobility() {return mobility;}
+  public void setFoods(PreferenceTable foodsToEat) {foods = foodsToEat;}
   //Constructors
   public Animal (Ecosystem eco,String createAs){
     super(eco,createAs);
@@ -20,14 +21,19 @@ class Animal extends Organism
           int foodPointValue,
           PreferenceTable placesToLive,
           PreferenceTable foodsToEat,
+          int reproduction,
           int successAtHunting,
           int successAtEvasion){
     
-    super(createAs,foodPointValue,placesToLive);
+    super(createAs,foodPointValue,placesToLive,reproduction);
     foods=foodsToEat;
     huntingSuccess=successAtHunting; 
     evasionSuccess=successAtEvasion;  }
   
+  /* Animal (Animal original)
+   {
+   String species = original.getSpecies();
+   PreferenceTable placesToLive = */
   
   public void move()
   {
@@ -64,7 +70,7 @@ class Animal extends Organism
   
   public Organism pickPrey ()
   {
-    Organism preferred = getParent().getInhabitants().get(1);
+    Organism preferred = getParent().getInhabitants().get(0);
     int maxpreference = foods.getPrefFor(preferred.getSpecies());
     for (Organism potentialPrey : getParent().getInhabitants())
     {
@@ -85,5 +91,24 @@ class Animal extends Organism
   {
     addEnergy (other.getFoodValue());
     other.die();
+  }
+  
+  public void reproduce ()
+  {
+    if (Math.random() * 100 < reproductiveSuccess)
+      super.reproduce();
+  }
+  
+  public Organism clone ()
+  {
+    String createAs = getSpecies();
+    int foodPointValue = getFoodValue();
+    PreferenceTable placesToLive = getHabitats();
+    PreferenceTable foodsToEat = foods;
+    int reproduction = getReproductiveSuccess();
+    int successAtHunting = huntingSuccess;
+    int successAtEvasion = evasionSuccess;
+    
+    return new Animal(createAs,foodPointValue,placesToLive,foodsToEat,reproduction,successAtHunting,successAtEvasion);
   }
 }
