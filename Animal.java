@@ -48,7 +48,7 @@ class Animal extends Organism implements Cloneable
   {
     Organism prey = pickPrey();
     if (prey != null)
-      eat (prey);
+      hunt (prey);
     if (Math.random () * 100 < mobility)
       move();
     return super.act();
@@ -67,8 +67,8 @@ class Animal extends Organism implements Cloneable
   
   public Organism pickPrey ()
   {
-    Organism preferred = getParent().getInhabitants().get(0);
-    int maxpreference = foods.getPrefFor(preferred.getSpecies());
+    Organism preferred = null;
+    int maxpreference = 0;
     for (Organism potentialPrey : getParent().getInhabitants())
     {
       if (foods.getPrefFor(potentialPrey.getSpecies()) > maxpreference)
@@ -77,9 +77,6 @@ class Animal extends Organism implements Cloneable
         maxpreference = foods.getPrefFor(preferred.getSpecies());
       }
     }
-    if (maxpreference == 0)
-      return null;
-    else
       return preferred;
     
   }
