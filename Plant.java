@@ -31,7 +31,9 @@ class Plant extends Organism
       photosynthesize();}
     //else 
             //System.out.println(rand+">"+photosynthesisSuccess);
-    return super.act();
+    boolean success = super.act();
+    reproduce();
+    return success;
   }
   
   public void photosynthesize ()

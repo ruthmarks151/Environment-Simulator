@@ -48,6 +48,7 @@ class Ecosystem
       if (inhabitants.get(i).act())
         i--;
     }
+    mate();
   }
   
   public void add (Organism baby)
@@ -59,7 +60,7 @@ class Ecosystem
   public void add (String speciesToAdd,int amount){
     SpeciesTable st=new SpeciesTable();
     for (int i=0;i<amount;i++){
-      add(st.make(speciesToAdd));
+      add(SpeciesTable.make(speciesToAdd));
     }
     
   }
@@ -82,6 +83,21 @@ class Ecosystem
         }
         
       }
+    }
+  }
+  
+  public void mate() {
+    List<String> species=new ArrayList<String>();
+    for (Organism inhabitant : inhabitants)//For each loop
+    {
+      species.add(inhabitant.getSpecies());//Fill the arraylist of strings with the species of every animal
+    }
+    
+    Set<String> unique = new HashSet<String>(species);
+    for (String key : unique) {
+      int pop = Collections.frequency(species, key);
+      int babies = pop / 2 * SpeciesTable.make(key).getReproductiveSuccess() / 100;
+      add (key, babies);
     }
   }
   

@@ -56,7 +56,6 @@ abstract class Organism implements Cloneable
   
   public boolean act(){
     energy--;
-    reproduce();
     if (energy <= 0) {
       die();
       return true;
