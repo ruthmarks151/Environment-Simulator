@@ -1,3 +1,4 @@
+/**********************************************************************************************************************/
 import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
@@ -8,11 +9,16 @@ import java.util.Hashtable;
 class ControlBar extends JPanel{
   Timer t;
   TimerControls tc;
-  ControlBar(MainWindow parent){
+  MainWindow parent;
+  ControlBar(MainWindow creator){
+    parent=creator;
+    
     super.setPreferredSize(new Dimension(1024,172));
     setLayout(new BorderLayout());
     
     tc=new TimerControls(this);
+    super.add(new SaveControls(parent.getGrid()),BorderLayout.EAST);
+    
     
     super.add(tc,BorderLayout.WEST);
     
@@ -21,7 +27,36 @@ class ControlBar extends JPanel{
   }
   
 }
-
+/**********************************************************************************************************************/
+class SaveControls extends JPanel implements ActionListener{
+  private JButton save;
+  private JButton load;
+  private Grid grid;
+  
+  SaveControls(Grid currentGrid){
+    grid=currentGrid; 
+    super.setPreferredSize(new Dimension(200,172));
+    setLayout(new FlowLayout());
+    
+    save=new JButton("Save");
+    load=new JButton("Load");
+    
+    save.addActionListener(this);
+    load.addActionListener(this);
+    
+    super.add(save);
+    super.add(load);
+    
+    super.repaint();
+    super.setVisible(true);
+  }
+  
+  public void actionPerformed(ActionEvent e){
+    if(e.getSource().equals(save))
+      new GridSaver(grid,"name");
+  }
+}
+/**********************************************************************************************************************/
 class TimerControls extends JPanel implements ActionListener, ChangeListener{
   private ControlBar parent;
   private JButton pausePlay;

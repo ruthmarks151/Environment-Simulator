@@ -16,6 +16,7 @@ class Ecosystem
   public ArrayList<Organism> getInhabitants() {return inhabitants;}
   public int getRow(){return row;}
   public int getCol(){return col;}  
+  public Terrain getTerrain(){return habitat;}
   
   public Ecosystem (Grid map, int x,int y){
     parent=map;
