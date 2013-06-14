@@ -12,9 +12,9 @@ class EcosystemEditor extends JPanel implements ActionListener{
   private SpeciesAdder sa;
   private MainWindow parent;
   
-  public Ecosystem getEditted(){return edited;}
+  public synchronized Ecosystem getEditted(){return edited;}
   
-  public void replace (){
+  public synchronized void replace (){
     System.out.println("Requesting Replacement");
     parent.refresh();
   }
@@ -44,7 +44,7 @@ class EcosystemEditor extends JPanel implements ActionListener{
     
     setVisible(true);}
   
-  public void loadPops(){
+  public synchronized void loadPops(){
     String manifest=edited.manifest();//Gets the manifest from the ecosystem
     
     while (manifest.indexOf('\n')!=-1){//While there are still newlines in the string
@@ -60,14 +60,14 @@ class EcosystemEditor extends JPanel implements ActionListener{
   }
   
   //Changes the population in the Ecosystem
-  public void populationChange(String secies,int change ){
+  public synchronized void populationChange(String secies,int change ){
     if (change>0)
       edited.add(secies,change);
     else
       edited.remove(secies,Math.abs(change));
   }
   
-  private void checkForPopChanges(){
+  private synchronized void checkForPopChanges(){
     for(PopulationRow pr:populationRows){
       int change;
       change=pr.getPopChange();
@@ -80,7 +80,7 @@ class EcosystemEditor extends JPanel implements ActionListener{
     }
   }
   //Action Event 
-  public void actionPerformed(ActionEvent e){
+  public synchronized void actionPerformed(ActionEvent e){
     //Adding from the row
     
     String chosenSpecies=sa.species.getSelectedItem().toString();
@@ -114,9 +114,9 @@ class PopulationRow extends JPanel {
   private JTextField population;
   private int popInitial;
   
-  public String getSpecies(){return species.getText();}
+  public synchronized String getSpecies(){return species.getText();}
   
-  public int getPopChange(){
+  public synchronized int getPopChange(){
     int change;
     try{  
       if (Integer.parseInt(population.getText())>=0){      
@@ -132,7 +132,7 @@ class PopulationRow extends JPanel {
     return change;
   }    
   
-  public boolean noPop (){
+  public synchronized boolean noPop (){
     if(population.getText().equals("0"))
       return true;
     return false;

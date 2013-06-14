@@ -15,15 +15,15 @@ class Grid extends JPanel implements MouseListener
   protected MainWindow parent=null;
   
 //Getters
-  public Ecosystem[][] getMap (){return map;}
-  public int getRows() {return map.length;}
-  public int getCols() {return map[0].length;}
-  public Ecosystem getEcosystem(int x,int y){return map[x][y];}
-  public Ecosystem getSelected(){return map[selectedRow][selectedCol];} 
-  public MainWindow getParent() {return parent;}
+  public synchronized Ecosystem[][] getMap (){return map;}
+  public synchronized int getRows() {return map.length;}
+  public synchronized int getCols() {return map[0].length;}
+  public synchronized Ecosystem getEcosystem(int x,int y){return map[x][y];}
+  public synchronized Ecosystem getSelected(){return map[selectedRow][selectedCol];} 
+  public synchronized MainWindow getParent() {return parent;}
   
   //Setters
-  public void setParent(MainWindow mainWin){parent=mainWin;}
+  public synchronized void setParent(MainWindow mainWin){parent=mainWin;}
   
   public Grid (int r, int c)
   {
@@ -53,7 +53,7 @@ class Grid extends JPanel implements MouseListener
   
   //Graphics
   @Override
-  protected void paintComponent(Graphics g) {
+  protected synchronized void paintComponent(Graphics g) {
     for(int row=0;row<map.length;row++){
       for(int col=0;col<map[row].length;col++){    
         g.drawImage(map[row][col].getImage(), row*32, col*32, null);} // see javadoc for more info on the parameters   
@@ -62,7 +62,7 @@ class Grid extends JPanel implements MouseListener
     g.drawImage(selector,selectedRow*32,selectedCol*32,null);
   }
   //Image IO
-  private Image loadImage (String name)  //loads image from file
+  private synchronized Image loadImage (String name)  //loads image from file
   {
     Image img = null;
     try
@@ -79,7 +79,7 @@ class Grid extends JPanel implements MouseListener
     return img;
   }
   //Mouse Listener Components
-  public void mousePressed(MouseEvent e){
+  public synchronized void mousePressed(MouseEvent e){
     selectedRow=e.getX()/32;
     selectedCol=(e.getY()-32)/32;//This is a patch to fix weird errors in windows XP
     repaint();

@@ -14,8 +14,8 @@ class Ecosystem
   Image mapSquare;
   //Getters
   public synchronized ArrayList<Organism> getInhabitants() {return inhabitants;}
-  public int getRow(){return row;}
-  public int getCol(){return col;}
+  public synchronized int getRow(){return row;}
+  public synchronized int getCol(){return col;}
   
   public Ecosystem (Grid map, int x,int y){
     parent=map;
@@ -113,10 +113,10 @@ class Ecosystem
     
   } 
   
-  public Image getImage (){
+  public synchronized Image getImage (){
   return mapSquare;
   }
-  public Image loadImage (String name)  //loads image from file
+  public synchronized Image loadImage (String name)  //loads image from file
   {
     Image img = null;
     try

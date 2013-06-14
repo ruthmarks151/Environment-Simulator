@@ -17,14 +17,14 @@ class OrganismLoader{
     }
   }
   //Output the numerical value of the first 2kb of a file
-  public void pukeFile (){
+  public synchronized void pukeFile (){
     try{
       for (int i=0;i<2048;i++)
         System.out.print(in.read()+", ");
     }catch(IOException e){}
   }
   //boolean evaluates if a gotten character indicates the end of a file
-  private void checkEOF(int read) throws IOException{
+  private synchronized void checkEOF(int read) throws IOException{
     eofs++;
     if (read==-1){//if it is the end of the file
       System.out.println("IOException"+eofs);
@@ -32,7 +32,7 @@ class OrganismLoader{
   }
   
   //Reads a line and returns it's string representation
-  private String readLine() throws IOException{
+  private synchronized String readLine() throws IOException{
     int read;
     String line="";
     while ((read=in.read())!=(int)','){//Runs until newline
@@ -43,7 +43,7 @@ class OrganismLoader{
   }
   
   //Reads a line containing only an integer and returns the integer value
-  private int readIntLine() throws IOException{
+  private synchronized int readIntLine() throws IOException{
     String num=readLine();
     return Integer.parseInt(num);} 
   
@@ -51,7 +51,7 @@ class OrganismLoader{
   //Each line contains a string which is the thing that is prefered
   //and a number representing the preference value
   //The section must ehd with \toLoad
-  private PreferenceTable ptLoad (String toLoad)throws IOException{
+  private synchronized PreferenceTable ptLoad (String toLoad)throws IOException{
     String line=readLine();
     PreferenceTable pt=new PreferenceTable();
     assert(line.equals(toLoad)) : "The file is broken";//Ensures the file isn't broken
@@ -65,7 +65,7 @@ class OrganismLoader{
   }
   
   
-  public Organism read() throws IOException{
+  public synchronized Organism read() throws IOException{
     String species;
     int foodValue;
     PreferenceTable lives;

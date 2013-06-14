@@ -32,7 +32,7 @@ class MainWindow extends JFrame implements MouseListener{
   }
 
   
-  public  void refresh(){
+  public  synchronized void refresh(){
           super.remove(editor);
       editor= new EcosystemEditor(myGrid.getSelected(),this);
     super.add(editor,BorderLayout.EAST);
@@ -42,11 +42,11 @@ class MainWindow extends JFrame implements MouseListener{
     }
   
     //Mouse Listener Components
-  public void mousePressed(MouseEvent e){}
-  public void mouseReleased(MouseEvent e){} 
-  public void mouseEntered(MouseEvent e){} 
-  public void mouseExited(MouseEvent e){}
-  public void mouseClicked(MouseEvent e){}
+  public synchronized void mousePressed(MouseEvent e){}
+  public synchronized void mouseReleased(MouseEvent e){} 
+  public synchronized void mouseEntered(MouseEvent e){} 
+  public synchronized void mouseExited(MouseEvent e){}
+  public synchronized void mouseClicked(MouseEvent e){}
     
   }
   

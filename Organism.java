@@ -14,8 +14,8 @@ abstract class Organism implements Cloneable
   protected PreferenceTable habitats; 
   
   //Getters
-  public int getRow(){return parent.getRow();}
-  public int getCol(){return parent.getCol();}
+  public synchronized int getRow(){return parent.getRow();}
+  public synchronized int getCol(){return parent.getCol();}
   public synchronized String getSpecies(){return species;}
   public synchronized int getFoodValue(){return foodValue;}
   public synchronized Ecosystem getParent(){return parent;}

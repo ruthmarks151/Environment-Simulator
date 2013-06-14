@@ -27,7 +27,7 @@ class Terrain
   }
   
   //This needs to get tuned Right now it spews random junk
-  public String type(){
+  public synchronized String type(){
     if (water>80)
       return "Water";
     if(water>40){
@@ -78,12 +78,12 @@ class Terrain
     }
   }
   
-  public int getLight ()
+  public synchronized int getLight ()
   {
     return light;
   }
   
-  public void changeLight (int num)
+  public synchronized void changeLight (int num)
   {
     light = num;
     if (light < 0)
@@ -96,12 +96,12 @@ class Terrain
     }
   }
   
-  public int getWater ()
+  public synchronized int getWater ()
   {
     return water;
   }
   
-  public void changeWater (int num)
+  public synchronized void changeWater (int num)
   {
     water = num;
     if (water < 0)
@@ -114,12 +114,12 @@ class Terrain
     }
   }
   
-  public int getTemp ()
+  public synchronized int getTemp ()
   {
     return temp;
   }
   
-  public void changeTemp (int num)
+  public synchronized void changeTemp (int num)
   {
     temp = num;
     if (temp < 0)

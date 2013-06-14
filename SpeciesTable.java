@@ -5,7 +5,7 @@ class SpeciesTable{
   
   static Organism[] species=new Organism[0]; ;
   
-  public static String[] getOrganisms(){
+  public synchronized static String[] getOrganisms(){
     String[] organisms = new String[species.length]; 
     for (int i=0;i<species.length;i++){
       organisms[i]=species[i].getSpecies();
@@ -16,11 +16,11 @@ class SpeciesTable{
   SpeciesTable (){
   }
   
-  public static void knownSpecies(){
+  public synchronized static void knownSpecies(){
     for (int i=0;i<species.length;i++)
       System.out.println(species[i].getSpecies());
   }
-  public static Organism make (String name){
+  public synchronized static Organism make (String name){
     for (int i=0;i<species.length;i++){//Look Through the array of Organisms to see if one already exists with that name
       if (species[i].getSpecies().equals(name))
         return species[i].clone();//If it has the requested name return it
@@ -41,7 +41,7 @@ class SpeciesTable{
     }
   }
   
-  private static void addOrganismToTable(Organism creature){
+  private synchronized static void addOrganismToTable(Organism creature){
     Organism[]newTable=new Organism[species.length+1];
     
     for(int i=0;i<species.length;i++){//Standard value copying for loop

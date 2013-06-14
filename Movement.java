@@ -12,7 +12,7 @@ class Movement implements ActionListener
   }
   
   // each time the timer gives an action
-  public void actionPerformed (ActionEvent event)
+  public synchronized void actionPerformed (ActionEvent event)
   {
     // advance the colony
     grid.advance ();

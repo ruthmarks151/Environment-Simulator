@@ -47,7 +47,7 @@ class TimerControls extends JPanel implements ActionListener, ChangeListener{
     super.setVisible(true);
   }
   
-  public void actionPerformed(ActionEvent e){
+  public synchronized void actionPerformed(ActionEvent e){
     if (e.getSource().equals(pausePlay)){
       if(pausePlay.getText().equals("Play")){
         pausePlay.setText("Pause");
@@ -60,7 +60,7 @@ class TimerControls extends JPanel implements ActionListener, ChangeListener{
     }
   }
   
-  public void stateChanged(ChangeEvent e) {
+  public synchronized void stateChanged(ChangeEvent e) {
     JSlider source = (JSlider)e.getSource();
     if (!source.getValueIsAdjusting()) {
       int delay =1000* (int)source.getValue();
@@ -69,7 +69,7 @@ class TimerControls extends JPanel implements ActionListener, ChangeListener{
   }
   
   
-  private JSlider makeJSlider (){
+  private synchronized JSlider makeJSlider (){
     
     JSlider slider=new JSlider(JSlider.VERTICAL,0, 10, 1);
     slider.setMajorTickSpacing(1);

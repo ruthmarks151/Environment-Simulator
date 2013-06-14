@@ -10,10 +10,10 @@ class Simulation extends JPanel
   private static Timer t;
   
   //Getters
-  public static Grid getGrid(){return myGrid;}
-  public static Timer timer(){return t;}
+  public synchronized static Grid getGrid(){return myGrid;}
+  public synchronized static Timer timer(){return t;}
   //Main
-  public static void main(String[] args){
+  public synchronized static void main(String[] args){
     
     //Declare a new grid   
     myGrid=new Grid(16,16);
