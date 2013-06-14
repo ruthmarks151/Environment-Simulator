@@ -24,7 +24,7 @@ class Ecosystem
     col=y;
     
     habitat = new Terrain(this);
-    mapSquare=loadImage(habitat.type());
+    mapSquare=loadImage(habitat.getType());
     inhabitants = new ArrayList<Organism>();
   }
   

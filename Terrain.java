@@ -6,6 +6,7 @@ class Terrain
   protected int water; //same as light
   protected int temp; //same
   protected Ecosystem parent;
+  protected String type;
   public Terrain (Ecosystem creator)
   {
     parent=creator;
@@ -26,6 +27,8 @@ class Terrain
       temp = (int)Math.round(r.nextDouble()*100);
     }
     while (temp > 100 && temp < 0);
+    
+    type = type();
   }
   
   //This needs to get tuned Right now it spews random junk
@@ -47,6 +50,10 @@ class Terrain
     if (water<30 && temp > 60)
       return "Sand";
     return "Dirt";
+    }
+    
+    else if (row == 0)
+    {
     }
     if (water>75)
       return "Water";
@@ -96,6 +103,12 @@ class Terrain
     {
       temp = 100;
     }
+    type = type ();
+  }
+  
+  public String getType ()
+  {
+    return type;
   }
   
   public int getLight ()
