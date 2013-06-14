@@ -35,10 +35,11 @@ class Terrain
   public String type(){
     int row = parent.getRow();
     int col = parent.getCol();
+    String up, left;
     if (row == 0 && col == 0){
     if (water>80)
       return "Water";
-    if(water>40){
+    if(water>35){
       if(light>80)
         return "Short Grass";
       if (light>50)
@@ -54,10 +55,18 @@ class Terrain
     
     else if (row == 0)
     {
+      left = parent.getParent().getEcosystem(row,col-1).getTerrain().getType();
+      if (left.equals("Water"))
+        if (water > 75)
+            return "Water;
+    }
+    else
+    {
+    up = parent.getParent().getEcosystem(row-1,col).getTerrain().getType();
     }
     if (water>75)
       return "Water";
-    if(water>40){
+    if(water>35){
       if(light>80)
         return "Short Grass";
       if (light>50)
