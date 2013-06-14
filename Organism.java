@@ -16,17 +16,17 @@ abstract class Organism implements Cloneable
   //Getters
   public int getRow(){return parent.getRow();}
   public int getCol(){return parent.getCol();}
-  public String getSpecies(){return species;}
-  public int getFoodValue(){return foodValue;}
-  public Ecosystem getParent(){return parent;}
-  public int getEnergy(){return energy;}
-  public void addEnergy (int food){energy = energy + food;}
-  public PreferenceTable getHabitats() {return habitats;}
-  public int getReproductiveSuccess() {return reproductiveSuccess;}
+  public synchronized String getSpecies(){return species;}
+  public synchronized int getFoodValue(){return foodValue;}
+  public synchronized Ecosystem getParent(){return parent;}
+  public synchronized int getEnergy(){return energy;}
+  public synchronized void addEnergy (int food){energy = energy + food;}
+  public synchronized PreferenceTable getHabitats() {return habitats;}
+  public synchronized int getReproductiveSuccess() {return reproductiveSuccess;}
   
   
 //Setters
-  public void setParent(Ecosystem newParent){parent=newParent;}
+  public synchronized void setParent(Ecosystem newParent){parent=newParent;}
 
 //Constructors
   public Organism (Ecosystem eco,String createAs)
@@ -52,11 +52,10 @@ abstract class Organism implements Cloneable
   //Other methods
   
 
-  public ArrayList<Ecosystem> getAdjacent() {return parent.getAdjacent();}
+  public synchronized ArrayList<Ecosystem> getAdjacent() {return parent.getAdjacent();}
   
-  public boolean act(){
+  public synchronized boolean act(){
     energy--;
-    reproduce();
     if (energy <= 0) {
       die();
       return true;
@@ -64,17 +63,17 @@ abstract class Organism implements Cloneable
     return false;
   }
   
-  public void die()
+  public synchronized void die()
   {
     parent.remove(this);
   }
   
-  public void reproduce()
+  public synchronized void reproduce()
   {
     parent.add(SpeciesTable.make(getSpecies()));
   }
   
-  public Organism clone()
+  public synchronized Organism clone()
   {
       return this.clone();
   }

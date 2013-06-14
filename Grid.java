@@ -40,7 +40,7 @@ class Grid extends JPanel implements MouseListener
         super.setPreferredSize(new Dimension(c*32,r*32));
   }
   
-  public void advance ()
+  public synchronized void advance ()
   {
     for (Ecosystem[] line: map)
     {

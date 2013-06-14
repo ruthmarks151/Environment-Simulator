@@ -13,9 +13,9 @@ class Ecosystem
   Grid parent;
   Image mapSquare;
   //Getters
-  public ArrayList<Organism> getInhabitants() {return inhabitants;}
+  public synchronized ArrayList<Organism> getInhabitants() {return inhabitants;}
   public int getRow(){return row;}
-  public int getCol(){return col;}  
+  public int getCol(){return col;}
   
   public Ecosystem (Grid map, int x,int y){
     parent=map;
@@ -27,7 +27,7 @@ class Ecosystem
     inhabitants = new ArrayList<Organism>();
   }
   
-  public ArrayList<Ecosystem> getAdjacent()
+  public synchronized ArrayList<Ecosystem> getAdjacent()
   {
     ArrayList<Ecosystem> neighbours = new ArrayList<Ecosystem>();
     for (int r = row - 1; r <= row + 1; r++)
@@ -41,8 +41,14 @@ class Ecosystem
     return neighbours;
   }
   
-  public void advance ()
+  public synchronized void advance ()
   {
+    for (Organism inhabitant : inhabitants)
+    {
+      if (inhabitant instanceof Animal)
+        ((Animal)inhabitant).makeAvailable();
+    }
+    
     for (int i = 0; i < inhabitants.size(); i++)
     {
       if (inhabitants.get(i).act())
@@ -50,13 +56,13 @@ class Ecosystem
     }
   }
   
-  public void add (Organism baby)
+  public synchronized void add (Organism baby)
   {
     baby.setParent(this);
     inhabitants.add(baby);
   }
   
-  public void add (String speciesToAdd,int amount){
+  public synchronized void add (String speciesToAdd,int amount){
     SpeciesTable st=new SpeciesTable();
     for (int i=0;i<amount;i++){
       add(st.make(speciesToAdd));
@@ -64,13 +70,13 @@ class Ecosystem
     
   }
   
-  public Organism remove (Organism deceased)
+  public synchronized Organism remove (Organism deceased)
   {
     inhabitants.remove(deceased);
     return deceased;
   }
   
-  public void remove(String speciesToRemove,int amount){
+  public synchronized void remove(String speciesToRemove,int amount){
     
     for (int i=0;i<amount;i++){
       for (Organism inhabitant : inhabitants)//For each loop
@@ -85,7 +91,7 @@ class Ecosystem
     }
   }
   
-  public String manifest(){
+  public synchronized String manifest(){
     
     String manifest="";//Start with an empty manifest
     

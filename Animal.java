@@ -8,16 +8,22 @@ class Animal extends Organism implements Cloneable
   private PreferenceTable foods; 
   private int huntingSuccess;
   private int evasionSuccess;
+  private boolean gender;
+  private boolean available;
   //Getters
-  public int getEvasionSuccess() {return evasionSuccess;}
-  public int getMobility() {return mobility;}
-  public PreferenceTable getFoods() {return foods;}
+  public synchronized int getEvasionSuccess() {return evasionSuccess;}
+  public synchronized int getMobility() {return mobility;}
+  public synchronized boolean getGender(){return gender;}
+  public synchronized PreferenceTable getFoods() {return foods;}
+  public synchronized boolean isAvailable() {return available;}
+  public synchronized void makeAvailable() {available = true;}
+  public synchronized void makeUnavailable() {available = false;}
   //Constructors
   public Animal (Ecosystem eco,String createAs){
     super(eco,createAs);
   }
   
-  Animal (String createAs,
+  public Animal (String createAs,
           int foodPointValue,
           PreferenceTable placesToLive,
           int reproductiveSuccess,
@@ -30,10 +36,13 @@ class Animal extends Organism implements Cloneable
     foods=foodsToEat;
     huntingSuccess=successAtHunting; 
     evasionSuccess=successAtEvasion;
-    mobility = agility;}
+    mobility = agility;
+    gender = Math.random() < 0.5;
+    available = true;
+  }
   
-  
-  public void move()
+  // migrate to an adjacent ecosystem
+  public synchronized void move()
   {
     getParent().remove(this);
     ArrayList<Ecosystem> destinations = getAdjacent();
@@ -44,17 +53,18 @@ class Animal extends Organism implements Cloneable
     setParent (newparent);
   }
   
-  public boolean act ()
+  public synchronized boolean act ()
   {
     Organism prey = pickPrey();
     if (prey != null)
       eat (prey);
+    mate();
     if (Math.random () * 100 < mobility)
       move();
     return super.act();
   }
   
-  public void hunt (Organism other)
+  public synchronized void hunt (Organism other)
   {
     if (other instanceof Animal)
     {
@@ -65,7 +75,7 @@ class Animal extends Organism implements Cloneable
       eat(other);
   }
   
-  public Organism pickPrey ()
+  public synchronized Organism pickPrey ()
   {
     Organism preferred = getParent().getInhabitants().get(0);
     int maxpreference = foods.getPrefFor(preferred.getSpecies());
@@ -84,19 +94,33 @@ class Animal extends Organism implements Cloneable
     
   }
   
-  public void reproduce ()
+  public synchronized void mate ()
   {
-    if (Math.random() * 100 < getReproductiveSuccess() / 2)
+    ArrayList<Organism> coinhabitants = getParent().getInhabitants();
+    for (Organism potentialMate : coinhabitants)
+    {
+      if (potentialMate.getSpecies().equals(getSpecies()) && gender != ((Animal)potentialMate).getGender() && ((Animal)potentialMate).isAvailable())
+      {
+        makeUnavailable();
+        ((Animal)potentialMate).makeUnavailable();
+        reproduce();
+      }
+    }
+  }
+  
+  public synchronized void reproduce ()
+  {
+    if (Math.random() * 100 < getReproductiveSuccess())
       super.reproduce();
   }
   
-  public void eat (Organism other)
+  public synchronized void eat (Organism other)
   {
     addEnergy (other.getFoodValue());
     other.die();
   }
   
-  public Animal clone ()
+  public synchronized Animal clone ()
   {
      String createAs = getSpecies();
      int foodPointValue = getFoodValue();
