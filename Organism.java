@@ -11,7 +11,7 @@ abstract class Organism implements Cloneable
   protected int energy;
   protected String species;
   protected Ecosystem parent;
-  protected PreferenceTable habitats; 
+  protected PreferenceTable habitats;
   
   //Getters
   public int getRow(){return parent.getRow();}

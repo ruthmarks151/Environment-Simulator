@@ -87,60 +87,73 @@ class Ecosystem
   }
   
   public void mate() {
-    List<String> species=new ArrayList<String>();
+    List<String> trues =new ArrayList<String>();
+    List<String> falses=new ArrayList<String>();
     for (Organism inhabitant : inhabitants)//For each loop
     {
-      species.add(inhabitant.getSpecies());//Fill the arraylist of strings with the species of every animal
+      if (inhabitant instanceof Animal)
+      {
+        if (((Animal) inhabitant).getGender())
+          trues.add(inhabitant.getSpecies());//Fill the arraylist of strings with the species of every animal
+        else
+          falses.add(inhabitant.getSpecies());
+      }
     }
     
-    Set<String> unique = new HashSet<String>(species);
-    for (String key : unique) {
-      int pop = Collections.frequency(species, key);
-      int babies = pop / 2 * SpeciesTable.make(key).getReproductiveSuccess() / 100;
+    Set<String> uniquetrues = new HashSet<String>(trues);
+    Set<String> uniquefalses = new HashSet<String>(falses);
+    for (String key : uniquetrues) {
+      int totaltrues = Collections.frequency(trues, key);
+      int totalfalses = Collections.frequency(falses, key);
+      int babies;
+      if (totaltrues < totalfalses)
+        babies = totaltrues * SpeciesTable.make(key).getReproductiveSuccess() / 100;
+      else
+        babies = totalfalses * SpeciesTable.make(key).getReproductiveSuccess() / 100;
       add (key, babies);
     }
   }
-  
-  public String manifest(){
-    
-    String manifest="";//Start with an empty manifest
-    
-    List<String> species=new ArrayList<String>();
-    for (Organism inhabitant : inhabitants)//For each loop
-    {
-      species.add(inhabitant.getSpecies());//Fill the arraylist of strings with the species of every animal
-    }
-    
-    //Deep magic uses HashSets more info at http://stackoverflow.com/a/5211215
-    //Runs in  O(2(n^2)) so it could be improved
-    Set<String> unique = new HashSet<String>(species);
-    for (String key : unique) {
-      manifest+=(key + ":" + Collections.frequency(species, key)+"\n");//THis can be changed. We want to maximize parseability
-    }
-    
-    
-    return manifest;  
-    
-  } 
-  
-  public Image getImage (){
-  return mapSquare;
-  }
-  public Image loadImage (String name)  //loads image from file
-  {
-    Image img = null;
-    try
-    {
-      img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
-      
 
-    }
-    catch (IOException e)
-    {
-      System.out.println("Image load error"+"\n"+"images/" + name + ".png");
-    }
-    
-    return img;
+public String manifest(){
+  
+  String manifest="";//Start with an empty manifest
+  
+  List<String> species=new ArrayList<String>();
+  for (Organism inhabitant : inhabitants)//For each loop
+  {
+    species.add(inhabitant.getSpecies());//Fill the arraylist of strings with the species of every animal
   }
   
+  //Deep magic uses HashSets more info at http://stackoverflow.com/a/5211215
+  //Runs in  O(2(n^2)) so it could be improved
+  Set<String> unique = new HashSet<String>(species);
+  for (String key : unique) {
+    manifest+=(key + ":" + Collections.frequency(species, key)+"\n");//THis can be changed. We want to maximize parseability
+  }
+  
+  
+  return manifest;  
+  
+} 
+
+public Image getImage (){
+  return mapSquare;
+}
+public Image loadImage (String name)  //loads image from file
+{
+  Image img = null;
+  try
+  {
+    img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
+    
+    
+  }
+  catch (IOException e)
+  {
+    System.out.println("Image load error"+"\n"+"images/" + name + ".png");
+  }
+  
+  return img;
+}
+
 }

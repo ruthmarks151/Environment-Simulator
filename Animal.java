@@ -8,10 +8,12 @@ class Animal extends Organism implements Cloneable
   private PreferenceTable foods; 
   private int huntingSuccess;
   private int evasionSuccess;
+  private boolean gender;
   //Getters
   public int getEvasionSuccess() {return evasionSuccess;}
   public int getMobility() {return mobility;}
   public PreferenceTable getFoods() {return foods;}
+  public boolean getGender() {return gender;}
   //Constructors
   public Animal (Ecosystem eco,String createAs){
     super(eco,createAs);
@@ -30,7 +32,8 @@ class Animal extends Organism implements Cloneable
     foods=foodsToEat;
     huntingSuccess=successAtHunting; 
     evasionSuccess=successAtEvasion;
-    mobility = agility;}
+    mobility = agility;
+    gender = Math.random() < 0.5;}
   
   
   public void move()
