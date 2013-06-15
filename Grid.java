@@ -24,6 +24,7 @@ class Grid extends JPanel implements MouseListener
   
   //Setters
   public void setParent(MainWindow mainWin){parent=mainWin;}
+  public void setMap (Ecosystem[][] newEcos){map=newEcos;}
   
   public Grid (int r, int c)
   {

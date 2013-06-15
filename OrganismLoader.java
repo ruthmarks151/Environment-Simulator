@@ -14,6 +14,7 @@ class OrganismLoader{
     }
     catch(IOException e) {
       System.out.println("Organism file not found");
+      assert(1==2):("Organism not found:"+species);
     }
   }
   //Output the numerical value of the first 2kb of a file

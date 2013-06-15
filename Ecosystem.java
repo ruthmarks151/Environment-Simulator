@@ -28,6 +28,16 @@ class Ecosystem
     inhabitants = new ArrayList<Organism>();
   }
   
+    public Ecosystem (Grid map, int x,int y,Terrain newTerrain){
+    parent=map;
+    row=x;
+    col=y;
+    
+    habitat = newTerrain;
+    mapSquare=loadImage(habitat.type());
+    inhabitants = new ArrayList<Organism>();
+  }
+
   public ArrayList<Ecosystem> getAdjacent()
   {
     ArrayList<Ecosystem> neighbours = new ArrayList<Ecosystem>();
@@ -58,9 +68,8 @@ class Ecosystem
   }
   
   public void add (String speciesToAdd,int amount){
-    SpeciesTable st=new SpeciesTable();
     for (int i=0;i<amount;i++){
-      add(st.make(speciesToAdd));
+      add(SpeciesTable.make(speciesToAdd));
     }
     
   }

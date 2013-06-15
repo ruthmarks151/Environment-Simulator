@@ -7,23 +7,28 @@ import java.awt.event.*;
 import java.util.Hashtable;
 
 class ControlBar extends JPanel{
-  Timer t;
-  TimerControls tc;
-  MainWindow parent;
+  protected Timer t;
+  protected TimerControls tc;
+  protected SaveControls sc;
+  protected MainWindow parent;
+  
+  public MainWindow getParent(){return parent;}
+  
   ControlBar(MainWindow creator){
     parent=creator;
     
-    super.setPreferredSize(new Dimension(1024,172));
+    super.setPreferredSize(new Dimension(720,172));
     setLayout(new BorderLayout());
     
     tc=new TimerControls(this);
-    super.add(new SaveControls(parent.getGrid()),BorderLayout.EAST);
+    sc=new SaveControls(parent.getGrid());
     
-    
-    super.add(tc,BorderLayout.WEST);
+    add(tc,BorderLayout.WEST);
+     add(sc,BorderLayout.EAST);
     
     super.repaint();
     super.setVisible(true);
+        System.out.println("Done Constucting");
   }
   
 }
@@ -32,8 +37,10 @@ class SaveControls extends JPanel implements ActionListener{
   private JButton save;
   private JButton load;
   private Grid grid;
+  private ControlBar parent;
   
   SaveControls(Grid currentGrid){
+    //parent=creator;
     grid=currentGrid; 
     super.setPreferredSize(new Dimension(200,172));
     setLayout(new FlowLayout());
@@ -49,11 +56,22 @@ class SaveControls extends JPanel implements ActionListener{
     
     super.repaint();
     super.setVisible(true);
+
+
   }
   
   public void actionPerformed(ActionEvent e){
+    
     if(e.getSource().equals(save))
       new GridSaver(grid,"name");
+    if(e.getSource().equals(load)){
+      GridLoader gl = new GridLoader(grid,"name");
+      try{
+        grid.setMap(gl.read());
+      }catch (IOException ex){
+        System.out.println("File load Failed");}
+    }
+    
   }
 }
 /**********************************************************************************************************************/

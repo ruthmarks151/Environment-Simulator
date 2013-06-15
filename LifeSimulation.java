@@ -26,12 +26,12 @@ class Simulation extends JPanel
     st.make("Bunny");//Create a bunny
     st.make("Bush");
 
-    new MainWindow(myGrid);
+    MainWindow mw=new MainWindow(myGrid);
     
     moveGrid = new Movement (myGrid);
     
     t = new Timer (1000, moveGrid);
-    
+   
     //t.start();
     
     //Code to test ecosystem Editor
