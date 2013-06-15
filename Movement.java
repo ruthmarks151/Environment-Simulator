@@ -5,7 +5,7 @@ class Movement implements ActionListener
   // data field colony, which is affected each time
   protected Grid grid;
   
-  // constructor sets the object's colony to the inputted colony
+  // constructorsets the object's grid to the grid
   public Movement (Grid thegrid)
   {
     grid = thegrid;
@@ -17,9 +17,9 @@ class Movement implements ActionListener
     // advance the colony
     grid.advance ();
     System.out.println("Advanced");
-    // repaint the panel area (must first get from the Life class)
-    //Life.getLife().repaint();
+    // repaint the grid
     grid.repaint();
+    // refresh the main window
     grid.getParent().refresh();
   }
 }

@@ -27,7 +27,7 @@ abstract class Organism implements Cloneable
   
 //Setters
   public void setParent(Ecosystem newParent){parent=newParent;}
-
+  
 //Constructors
   public Organism (Ecosystem eco,String createAs)
     //eco, THe ecoystem the organism lives in. 
@@ -38,8 +38,8 @@ abstract class Organism implements Cloneable
     
   }
   
-    public Organism (String createAs,int foodPointValue,PreferenceTable placesToLive, int reproduction)
-
+  public Organism (String createAs,int foodPointValue,PreferenceTable placesToLive, int reproduction)
+    
     //createAs the species of the organism.
   {
     species=createAs;
@@ -51,12 +51,15 @@ abstract class Organism implements Cloneable
   }
   //Other methods
   
-
+  
   public ArrayList<Ecosystem> getAdjacent() {return parent.getAdjacent();}
   
   public boolean act(){
+    // decrement the energy
     energy--;
+    // if out of energy
     if (energy <= 0) {
+      // die
       die();
       return true;
     }
@@ -65,17 +68,20 @@ abstract class Organism implements Cloneable
   
   public void die()
   {
+    // remove self from ecosystem
     parent.remove(this);
   }
   
   public void reproduce()
   {
+    // add clone of self to ecosystem
     parent.add(SpeciesTable.make(getSpecies()));
   }
   
   public Organism clone()
   {
-      return this.clone();
+    // clone self
+    return this.clone();
   }
   
   

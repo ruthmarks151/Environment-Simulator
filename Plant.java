@@ -25,35 +25,37 @@ class Plant extends Organism
   
   public boolean act ()
   {
-    int rand =(int)(Math.random() * 100);
-    if (rand < photosynthesisSuccess){
-      //System.out.println(rand+"<"+photosynthesisSuccess);
+    if (Math.random() * 100 < photosynthesisSuccess){
+      // photosynthesize, depending on species photosynthesis success and randomness
       photosynthesize();}
-    //else 
-            //System.out.println(rand+">"+photosynthesisSuccess);
     boolean success = super.act();
+    // reproduce
     reproduce();
     return success;
   }
   
   public void photosynthesize ()
   {
-      addEnergy(1);
+    // increment energy
+    addEnergy(1);
   }
   
   public void reproduce ()
   {
     if (Math.random() * 100 < getReproductiveSuccess())
+      // reproduce, depending on species reproductive success and randomness
       super.reproduce();
   }
   
-  public Plant clone()
+  public Plant clone() // implements Cloneable
   {
+    // create variables (only private variables belonging to superclass)
     String createAs = getSpecies();
     int foodPointValue = getFoodValue();
     PreferenceTable placesToLive = getHabitats();
     int photoSynthesisRequirements = getPhotosynthesisSuccess();
-      
+    
+    // return clone of self
     return new Plant(createAs,foodPointValue,placesToLive,reproductiveSuccess,photoSynthesisRequirements);
   }
 }
