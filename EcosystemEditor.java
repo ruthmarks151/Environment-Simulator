@@ -26,7 +26,7 @@ class EcosystemEditor extends JPanel implements ActionListener{
     populationRows=new ArrayList<PopulationRow>();
     
     //Layout Buisness
-    super.setPreferredSize(new Dimension(202,720));
+    super.setPreferredSize(new Dimension(200,250));
     setLayout(new FlowLayout());
     
     loadPops();
@@ -144,7 +144,7 @@ class PopulationRow extends JPanel {
     popInitial=Integer.parseInt(number);
     
     setLayout(new BorderLayout());
-    super.setPreferredSize(new Dimension(202,30));
+    super.setPreferredSize(new Dimension(200,30));
     species=new JLabel(name);
     population=new JTextField(popInitial+"",3);
     
@@ -167,7 +167,7 @@ class SpeciesAdder extends JPanel{
     parent=editor;
     
     setLayout(new BorderLayout());
-    super.setPreferredSize(new Dimension(202,30));
+    super.setPreferredSize(new Dimension(200,30));
     
     species=new JComboBox(SpeciesTable.getOrganisms());
     

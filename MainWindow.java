@@ -11,8 +11,8 @@ class MainWindow extends JFrame implements MouseListener{
   protected  EcosystemEditor editor;
   protected  Grid myGrid;
   protected ControlBar controls;
+  protected ManifestArea manifestArea;
   protected JPanel sidebar;
-  protected JPanel manifestArea;
   
   public Grid getGrid(){return myGrid;}
   
@@ -23,27 +23,20 @@ class MainWindow extends JFrame implements MouseListener{
     myGrid.setParent(this);
     editor=new EcosystemEditor(myGrid.getSelected(),this);
     // create an area to show the manifest
-    manifestArea = new JPanel();
-    // make this a 2-column layout, with as many rows as species
-    manifestArea.setLayout(new GridLayout (myGrid.manifest().size(),2));
-    // iterate through the global manifest
-    for (Manifest species : myGrid.manifest())
-    {
-      // display the species name
-      manifestArea.add(new JLabel (species.getSpecies()));
-      // display the global population of the species
-      manifestArea.add(new JLabel (Integer.toString(species.getPop())));
-    }
+     manifestArea=new ManifestArea(myGrid.manifest());    
+    
     // create a sidebar and add the editor and manifest area to the sidebar
     sidebar = new JPanel();
-    sidebar.add(editor, BorderLayout.NORTH);
-    sidebar.add(manifestArea, BorderLayout.SOUTH);
+    sidebar.setLayout(new BorderLayout());
+    sidebar.add(editor,BorderLayout.NORTH);
+    sidebar.add(manifestArea,BorderLayout.CENTER);
+    sidebar.setPreferredSize(new Dimension(200,520));
     controls=new ControlBar(this);
     
     super.setPreferredSize(new Dimension(720,720));
     super.setLayout(new BorderLayout());
     
-    super.add(myGrid,BorderLayout.CENTER);  
+    super.add(myGrid,BorderLayout.WEST);  
     super.add(sidebar,BorderLayout.EAST);  
     super.add(controls,BorderLayout.SOUTH);  
     
@@ -58,22 +51,17 @@ class MainWindow extends JFrame implements MouseListener{
     // create a new ecosystem editor
     editor= new EcosystemEditor(myGrid.getSelected(),this);
     // create and set up a new manifest area
-    manifestArea = new JPanel();
-    manifestArea.setLayout(new GridLayout (myGrid.manifest().size(),2));
-    for (Manifest species : myGrid.manifest())
-    {
-      manifestArea.add(new JLabel (species.getSpecies()));
-      manifestArea.add(new JLabel (Integer.toString(species.getPop())));
-    }
-    // create a new sidebar, with the new ecosystem editor and new manifest area
+    manifestArea.refresh(myGrid.manifest());   
+// create a new sidebar, with the new ecosystem editor and new manifest area
     sidebar = new JPanel();
-    sidebar.add(editor, BorderLayout.NORTH);
-    sidebar.add(manifestArea, BorderLayout.SOUTH);
+    sidebar.add(editor,BorderLayout.NORTH);
+    sidebar.add(manifestArea,BorderLayout.CENTER);
     sidebar.setSize(new Dimension (100, 200));
     super.add(sidebar);
     super.repaint();
     super.pack();
     editor.setVisible(true);
+    manifestArea.setVisible(true);
   }
   
   //Mouse Listener Components
