@@ -27,7 +27,6 @@ class ManifestArea extends JPanel {
     
     for (Manifest species : manifest)
     {
-      System.out.println(species.getSpecies()+":"+species.getPop());
       super.add(new JLabel (species.getSpecies()));
       super.add(new JLabel (Integer.toString(species.getPop())));
     }

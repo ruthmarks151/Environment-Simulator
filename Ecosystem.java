@@ -4,6 +4,7 @@ import javax.imageio.*; // allows image loading
 import javax.swing.*;
 import java.io.*; // allows file access
 import java.awt.Image;
+import java.awt.Color;
 
 class Ecosystem
 {
@@ -168,14 +169,40 @@ class Ecosystem
       manifest+=(key + ":" + Collections.frequency(species, key)+"\n");//THis can be changed. We want to maximize parseability
     }
     
-    
+   
     return manifest;
     
+  }
+  
+  public int getPop(String species){
+    String manifest=manifest();
+    
+    while (manifest.indexOf('\n')!=-1){//While there are still newlines in the string
+      String line=manifest.substring(0,manifest.indexOf('\n'));//Get the first line of text  
+      String name=line.substring(0,(line.indexOf(":")));
+      
+      if(name.equals(species)){
+        String number= line.substring((line.indexOf(":")+1),line.length());
+        return Integer.parseInt(number);
+      }
+      
+      manifest=manifest.substring(manifest.indexOf('\n')+1,manifest.length());  //Remove the line that was just processed from the string
+    }
+    return 0;
   }
   
   public Image getImage (){
     return mapSquare;
   }
+  
+  public Color heatMap (String species,int max){
+    if (max!=0){
+      int value= (int)(255*getPop(species))/max;
+      if (value!=0)
+        return new Color(value,0,255-value);}
+    return new Color(50,50,50);
+  }
+  
   public Image loadImage (String name)  //loads image from file
   {
     Image img = null;
