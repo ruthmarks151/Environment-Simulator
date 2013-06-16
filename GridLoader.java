@@ -60,12 +60,10 @@ class GridLoader{
   private Ecosystem ecoLoad()throws IOException{
    line = filein.readLine ();//Ecosystem:(row,col)
    Terrain ter=terrainLoad();
-   System.out.println("Creating ecosystem"+row+":"+col);
    Ecosystem eco=new Ecosystem(grid,row,col,ter);
    
    line =  filein.readLine ();//<Organism>
    line =  filein.readLine ();//First possible line
-   System.out.println(!line.equals("</Organisms>"));
    while (!line.equals("</Organisms>")){
      eco.add(beforeColon(),afterColon());//Organism:00
      line=filein.readLine();}

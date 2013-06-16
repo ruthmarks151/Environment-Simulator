@@ -22,50 +22,55 @@ class ControlBar extends JPanel{
     
     tc=new TimerControls(this);
     sc=new SaveControls(parent.getGrid());
-    
     add(tc,BorderLayout.WEST);
-     add(sc,BorderLayout.EAST);
+    add(sc,BorderLayout.EAST);
+    
     
     super.repaint();
     super.setVisible(true);
-        System.out.println("Done Constucting");
+    System.out.println("Done Constucting");
   }
   
 }
+
 /**********************************************************************************************************************/
 class SaveControls extends JPanel implements ActionListener{
   private JButton save;
   private JButton load;
   private Grid grid;
   private ControlBar parent;
+  private JTextField fileName;
   
   SaveControls(Grid currentGrid){
     //parent=creator;
     grid=currentGrid; 
     super.setPreferredSize(new Dimension(200,172));
-    setLayout(new FlowLayout());
+    setLayout(new GridLayout(3,0));
     
+    fileName=new JTextField("SaveName");
     save=new JButton("Save");
     load=new JButton("Load");
     
     save.addActionListener(this);
     load.addActionListener(this);
     
+    super.add(fileName);
     super.add(save);
     super.add(load);
     
     super.repaint();
     super.setVisible(true);
-
-
+  }
+  private String fileName(){
+    fileName.setText(fileName.getText().replaceAll("\\s",""));
+    return fileName.getText();
   }
   
   public void actionPerformed(ActionEvent e){
-    
     if(e.getSource().equals(save))
-      new GridSaver(grid,"name");
+      new GridSaver(grid, fileName());
     if(e.getSource().equals(load)){
-      GridLoader gl = new GridLoader(grid,"name");
+      GridLoader gl = new GridLoader(grid, fileName());
       try{
         grid.setMap(gl.read());
       }catch (IOException ex){
@@ -75,6 +80,7 @@ class SaveControls extends JPanel implements ActionListener{
   }
 }
 /**********************************************************************************************************************/
+
 class TimerControls extends JPanel implements ActionListener, ChangeListener{
   private ControlBar parent;
   private JButton pausePlay;
