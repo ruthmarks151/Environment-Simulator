@@ -1,7 +1,7 @@
 /**********************************************************************************************************************/
 class Plant extends Organism
 {
-  private static int photosynthesisSuccess;
+  private int photosynthesisSuccess;
   
   public int getPhotosynthesisSuccess(){return photosynthesisSuccess;}
   

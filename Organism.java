@@ -7,7 +7,7 @@ import java.io.*;
 
 abstract class Organism implements Cloneable
 {
-  protected static int foodValue, reproductiveSuccess;
+  protected int foodValue, reproductiveSuccess;
   protected int energy;
   protected String species;
   protected Ecosystem parent;

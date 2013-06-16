@@ -33,7 +33,7 @@ class MainWindow extends JFrame implements MouseListener{
     sidebar.setPreferredSize(new Dimension(200,520));
     controls=new ControlBar(this);
     
-    super.setPreferredSize(new Dimension(720,720));
+    super.setPreferredSize(new Dimension(750,720));
     super.setLayout(new BorderLayout());
     
     super.add(myGrid,BorderLayout.WEST);  

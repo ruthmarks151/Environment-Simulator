@@ -3,8 +3,8 @@ import java.util.*;
 
 class Animal extends Organism implements Cloneable
 {
-  private static ArrayList<Organism> foodSources;
-  private static int mobility;
+  private ArrayList<Organism> foodSources;
+  private int mobility;
   private PreferenceTable foods; 
   private int huntingSuccess;
   private int evasionSuccess;
