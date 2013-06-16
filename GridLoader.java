@@ -21,10 +21,10 @@ class GridLoader{
       filein = new BufferedReader (fr);
     }catch (IOException e){
       System.out.println("File not Found");
-    }      
+    }
   }
   
-  public Ecosystem[][] read()throws IOException{
+  public Ecosystem[][] read()throws IOException, NullPointerException{
  
   headerRead();
   Ecosystem[][] map=new Ecosystem[rowSize][colSize];
@@ -36,7 +36,7 @@ class GridLoader{
    return map; 
   }
   
-  private void headerRead() throws IOException{
+  private void headerRead() throws IOException, NullPointerException{
 
   line = filein.readLine();//Name line
   line = filein.readLine ();//<Header>

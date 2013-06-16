@@ -73,8 +73,11 @@ class SaveControls extends JPanel implements ActionListener{
       GridLoader gl = new GridLoader(grid, fileName());
       try{
         grid.setMap(gl.read());
-      }catch (IOException ex){
-        System.out.println("File load Failed");}
+      }catch (IOException ioex){
+        System.out.println("File load Failed");
+      }catch (NullPointerException npex){
+        System.out.println("File load Failed");
+      }
     }
     
   }
