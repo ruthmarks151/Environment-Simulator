@@ -52,6 +52,36 @@ class Grid extends JPanel implements MouseListener
     }
   }
   
+  public ArrayList<Manifest> manifest ()
+  {
+    // create manifest list
+    ArrayList<Manifest> manifest = new ArrayList<Manifest> ();
+    // create list of organisms
+    ArrayList<String> organisms = new ArrayList<String>();
+    // iterate through each block in the grid
+    for (Ecosystem[] line: map)
+    {
+      for (Ecosystem block: line)
+      {
+        // iterate through all inhabitants of each block
+        for (Organism inhabitant : block.getInhabitants())//For each loop
+        {
+          // add the species name of each organism to the big list
+          organisms.add(inhabitant.getSpecies());
+        }
+      }
+    }
+    // get the list of unique species present in the environment
+    Set<String> unique = new HashSet<String>(organisms);
+    // iterate through each species in the unique list
+    for (String key : unique) {
+      // create a manifest object, with a string of the species name and an int of the total population, and add it to the manifest list
+      manifest.add (new Manifest(key, Collections.frequency(organisms, key)));//THis can be changed. We want to maximize parseability
+    }
+    // return the global manifest list
+    return manifest;
+  }
+  
   //Graphics
   @Override
   protected void paintComponent(Graphics g) {

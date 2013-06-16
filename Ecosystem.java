@@ -169,9 +169,9 @@ class Ecosystem
     }
     
     
-    return manifest;  
+    return manifest;
     
-  } 
+  }
   
   public Image getImage (){
     return mapSquare;
