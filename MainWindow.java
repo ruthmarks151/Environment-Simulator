@@ -12,6 +12,8 @@ class MainWindow extends JFrame implements MouseListener{
   protected  Grid myGrid;
   protected ControlBar controls;
   
+  public Grid getGrid(){return myGrid;}
+  
   MainWindow(Grid grid){
     super("Life Simulation");
     super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -16,6 +16,7 @@ class Ecosystem
   public ArrayList<Organism> getInhabitants() {return inhabitants;}
   public int getRow(){return row;}
   public int getCol(){return col;}  
+  public Terrain getTerrain(){return habitat;}
   
   public Ecosystem (Grid map, int x,int y){
     parent=map;
@@ -27,6 +28,16 @@ class Ecosystem
     inhabitants = new ArrayList<Organism>();
   }
   
+    public Ecosystem (Grid map, int x,int y,Terrain newTerrain){
+    parent=map;
+    row=x;
+    col=y;
+    
+    habitat = newTerrain;
+    mapSquare=loadImage(habitat.type());
+    inhabitants = new ArrayList<Organism>();
+  }
+
   public ArrayList<Ecosystem> getAdjacent()
   {
     // create new arraylist
@@ -69,9 +80,7 @@ class Ecosystem
   }
   
   public void add (String speciesToAdd,int amount){
-    // iterate as many times as needed (as many as you need to add)
-    for (int i=0;i<amount;i++){
-      // add a new clone of the master organism of the specified species
+    for (int i=0;i<amount;i++){// add a new clone of the master organism of the specified specis
       add(SpeciesTable.make(speciesToAdd));
     }
     

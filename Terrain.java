@@ -11,12 +11,12 @@ class Terrain
     Random r = new Random();
     do
     {
-    light = (int)Math.round(r.nextDouble()*25)+50;
+      light = (int)Math.round(r.nextDouble()*25)+50;
     }
     while (light > 100 && light < 0);
     do
     {
-    water = (int)Math.round(r.nextDouble()*100);
+      water = (int)Math.round(r.nextDouble()*100);
     }
     while (water > 100 && water < 0);
     do
@@ -130,5 +130,13 @@ class Terrain
     {
       temp = 100;
     }
+  }
+  
+  public String manifest(){
+    String out="";
+    out+=("Light:"+light+"\n");
+    out+=("Water:"+water+"\n");
+    out+=("Temp:"+temp+"\n");
+    return out;
   }
 }

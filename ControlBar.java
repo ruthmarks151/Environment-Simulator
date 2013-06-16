@@ -1,3 +1,4 @@
+/**********************************************************************************************************************/
 import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
@@ -6,21 +7,79 @@ import java.awt.event.*;
 import java.util.Hashtable;
 
 class ControlBar extends JPanel{
-  Timer t;
-  TimerControls tc;
-  ControlBar(MainWindow parent){
-    super.setPreferredSize(new Dimension(1024,172));
+  protected Timer t;
+  protected TimerControls tc;
+  protected SaveControls sc;
+  protected MainWindow parent;
+  
+  public MainWindow getParent(){return parent;}
+  
+  ControlBar(MainWindow creator){
+    parent=creator;
+    
+    super.setPreferredSize(new Dimension(720,172));
     setLayout(new BorderLayout());
     
     tc=new TimerControls(this);
+    sc=new SaveControls(parent.getGrid());
+    add(tc,BorderLayout.WEST);
+    add(sc,BorderLayout.EAST);
     
-    super.add(tc,BorderLayout.WEST);
+    
+    super.repaint();
+    super.setVisible(true);
+    System.out.println("Done Constucting");
+  }
+  
+}
+
+/**********************************************************************************************************************/
+class SaveControls extends JPanel implements ActionListener{
+  private JButton save;
+  private JButton load;
+  private Grid grid;
+  private ControlBar parent;
+  private JTextField fileName;
+  
+  SaveControls(Grid currentGrid){
+    //parent=creator;
+    grid=currentGrid; 
+    super.setPreferredSize(new Dimension(200,172));
+    setLayout(new GridLayout(3,0));
+    
+    fileName=new JTextField("SaveName");
+    save=new JButton("Save");
+    load=new JButton("Load");
+    
+    save.addActionListener(this);
+    load.addActionListener(this);
+    
+    super.add(fileName);
+    super.add(save);
+    super.add(load);
     
     super.repaint();
     super.setVisible(true);
   }
+  private String fileName(){
+    fileName.setText(fileName.getText().replaceAll("\\s",""));
+    return fileName.getText();
+  }
   
+  public void actionPerformed(ActionEvent e){
+    if(e.getSource().equals(save))
+      new GridSaver(grid, fileName());
+    if(e.getSource().equals(load)){
+      GridLoader gl = new GridLoader(grid, fileName());
+      try{
+        grid.setMap(gl.read());
+      }catch (IOException ex){
+        System.out.println("File load Failed");}
+    }
+    
+  }
 }
+/**********************************************************************************************************************/
 
 class TimerControls extends JPanel implements ActionListener, ChangeListener{
   private ControlBar parent;
