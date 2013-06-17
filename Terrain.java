@@ -2,21 +2,23 @@
 import java.util.Random;
 class Terrain
 {
-    protected int light;
-    protected int water;
-    protected int temp;
-    protected Ecosystem parent;
-    protected String type;
+    protected int light; //integer from 0-100
+    protected int water; //int from 0-100
+    protected int temp; //int from 0-100
+    protected Ecosystem parent; //The Ecosystem that initiated the terrain
+    protected String type; //This is the terrain tile needed
     //Getters
-    public int getLight(){return light;}
-    public int getWater(){return water;}
-    public int getTemp(){return temp;}
-        
-    public Terrain (Ecosystem creator)
-    {
- parent = creator;
+    public int getLight(){return light;} //access light
+    public int getWater(){return water;} //access water
+    public int getTemp(){return temp;} //access temperature
+    public String getType (){return type;} //access type (for terrain tile)
 
- Random r = new Random ();
+        
+    public Terrain (Ecosystem creator) //default constructor, need creator/parent as input
+    {
+ parent = creator; 
+
+ Random r = new Random (); //initate random class, creates int from 0-100
  do
  {
      light = (int) Math.round (r.nextDouble () * 101);
@@ -37,12 +39,12 @@ class Terrain
     }
 
 
-    //This needs to get tuned Right now it spews random junk
+    //Classifies the type of terrain which is used for gui tiles
     public String type ()
     {
- int row = parent.getRow ();
+ int row = parent.getRow (); //this calls the ecosystem class to get Row and col in the grid
  int col = parent.getCol ();
- String up = "Dirt", left = "Dirt";
+ String up = "Dirt", left = "Dirt"; //up is the tile above this tile, left is tile to the left
  if (row == 0 && col == 0) //This is just default as no other terrain generated yet
  {
      if (water > 80)
@@ -113,14 +115,65 @@ class Terrain
 
 
  else
- { //Just import up tile too
+ { //This means it is not row 0;
+   if (col == 0) //first column of the grid, so no left tile
+   {
+     //get terrain type of tile on row up
+     up = parent.getParent ().getEcosystem (row - 1, col).getTerrain ().getType ();
+     //More lax to make it easier to look like tile on top.
+     if (up.equals ("Water"))
+  if (water > 75)
+      return "Water";
+     if (water > 30)
+     {
+  if (up.equals ("Short Grass"))
+      if (light > 75)
+   return "Short Grass";
+      else if (up.equals ("Mature Forest"))
+      {
+   if (light < 25)
+       return "Mature Forest";
+      }
+      else if (up.equals ("Young Forest"))
+   if (light > 17 && light < 53)
+       return "Young Forest";
+   else if (up.equals ("Tall Grass"))
+   {
+       if (light > 47 && light < 83)
+    return "Tall Grass";
+   }
+     }
+     if (up.equals ("Sand"))
+  if (water < 40 && temp > 50)
+      return "Sand";
+
+     //Else default initalization
+     if (water > 80)
+  return "Water";
+     if (water > 35)
+     {
+  if (light > 80)
+      return "Short Grass";
+  if (light > 50)
+      return "Tall Grass";
+  if (light > 20)
+      return "Young Forest";
+  return "Mature Forest";
+     }
+     if (water < 35 && temp > 55)
+  return "Sand";
+     return "Dirt";
+   }
+   
+   //Otherwise it will be normal case, row not equal 0, column not equal 0
+   left = parent.getParent ().getEcosystem (row, col - 1).getTerrain ().getType ();
      up = parent.getParent ().getEcosystem (row - 1, col).getTerrain ().getType ();
  }
 
 
  //Now we can use up and left tile to be more similar
  if (left.equals (up)) //if up and left are the same
- {
+ { //higher chance that tile will be the same
      if (left.equals ("Water"))
   if (water > 70)
       return "Water";
@@ -147,11 +200,13 @@ class Terrain
   if (water < 40 && temp > 50)
       return "Sand";
      if (left.equals ("Dirt"))
-       if (Math.random() < 0.45)
-       return "Dirt";
+       if (Math.random() < 0.45) //Dirt is just a default, so there may be a better tile
+       return "Dirt"; //Otherwise there would be too much dirt
  }
 
-
+//Otherwise we give a higher chance for it to be similar to one of the tiles
+ //Water is priority, Vegetation second, Sand last
+ //doesn't matter if just one is dirt as dirt is default tile
  if (left.equals ("Water") || up.equals ("Water"))
      if (water > 65)
   return "Water";
@@ -244,16 +299,7 @@ class Terrain
  type = type ();
     }
 
-
-    public String getType ()
-    {
- return type;
-    }
-
-
-    
-
-
+    //if you wish to change light variable
     public void changeLight (int num)
     {
  light = num;
@@ -262,17 +308,13 @@ class Terrain
      light = 0;
  }
 
-
  else if (light > 100)
  {
      light = 100;
  }
     }
 
-
-
-
-
+//if you wish to change water variable
     public void changeWater (int num)
     {
  water = num;
@@ -281,15 +323,13 @@ class Terrain
      water = 0;
  }
 
-
  else if (water > 100)
  {
      water = 100;
  }
     }
 
-
-
+    //if you wish to change temperature variable
     public void changeTemp (int num)
     {
  temp = num;
@@ -297,16 +337,15 @@ class Terrain
  {
      temp = 0;
  }
-
-
+ 
  else if (temp > 100)
  {
      temp = 100;
  }
     }
+ 
   
-  
-  public String manifest(){
+  public String manifest(){ //for output file
     String out="";
     out+=("Light:"+light+"\n");
     out+=("Water:"+water+"\n");
