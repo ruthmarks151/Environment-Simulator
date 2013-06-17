@@ -52,7 +52,7 @@ class Terrain
       return "Young Forest";
   return "Mature Forest";
      }
-     if (water < 30 && temp > 60)
+     if (water < 35 && temp > 55)
   return "Sand";
      return "Dirt";
  }
@@ -85,7 +85,7 @@ class Terrain
    }
      }
      if (left.equals ("Sand"))
-  if (water < 35 && temp > 55)
+  if (water < 40 && temp > 50)
       return "Sand";
 
      //Else default initalization
@@ -101,7 +101,7 @@ class Terrain
       return "Young Forest";
   return "Mature Forest";
      }
-     if (water < 30 && temp > 60)
+     if (water < 35 && temp > 55)
   return "Sand";
      return "Dirt";
  }
@@ -170,7 +170,7 @@ class Terrain
       }
  }
  if (left.equals ("Sand") || up.equals ("Sand"))
-     if (water < 35 && temp > 55)
+     if (water < 40 && temp > 50)
   return "Sand";
 
  //Default
@@ -188,7 +188,7 @@ class Terrain
  }
 
 
- if (water < 30 && temp > 60)
+ if (water < 35 && temp > 55)
      return "Sand";
  return "Dirt";
     }
