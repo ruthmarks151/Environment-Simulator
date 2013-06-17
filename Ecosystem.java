@@ -63,15 +63,17 @@ class Ecosystem
   
   public void advance ()
   {
-    // cycle through all inhabitants
+    //Calculate closeness to carrying capacity
+    
+    
+// cycle through all inhabitants
     for (int i = 0; i < inhabitants.size(); i++)
-    {
-      // make the organism act
-      if (inhabitants.get(i).act())
-        i--;
-    }
-    // get all the animals to mate
-    mate();
+  {
+        if (inhabitants.get(i).act())
+          i--;
+  }
+  // get all the animals to mate
+  mate();
   }
   
   public void add (Organism baby)
@@ -115,37 +117,33 @@ class Ecosystem
   }
   
   public void mate() {
-    // create lists for all organisms of the true gender and false gender
-    List<String> trues =new ArrayList<String>();
-    List<String> falses=new ArrayList<String>();
+    
+// create lists for all organisms of the true gender and false gender
+    List<String> breedable =new ArrayList<String>();
     // iterate through the list of inhabitants
     for (Organism inhabitant : inhabitants)
     {
       // if the inhabitant is an animal
       if (inhabitant instanceof Animal)
       {
-        // if it is a true gender
-        if (((Animal) inhabitant).getGender())
-          // add it to the list of trues
-          trues.add(inhabitant.getSpecies());
-        // if it is a false gender
-        else
-          // add it to the list of falses
-          falses.add(inhabitant.getSpecies());
+        if (inhabitant.getEnergy()>0){
+          if (((Animal) inhabitant).getGender())
+            // add it to the list of trues
+            breedable.add(inhabitant.getSpecies());
+
+        }
       }
     }
     
-    // make hashsets of the trues
-    Set<String> uniquetrues = new HashSet<String>(trues);
+    // make hashsets of them
+    Set<String> uniques = new HashSet<String>(breedable);
     // iterate through the list of species that have at least one true-gendered organism in the ecosystem
-    for (String key : uniquetrues) {
-      int totaltrues = Collections.frequency(trues, key); // get the total number of true-gendered occurences of this species
-      int totalfalses = Collections.frequency(falses, key); // get the total number of false-gendered occurences of this species
+    for (String key : uniques) {
       int babies = 0; // declare and initialize the number of children produced
-      int limiter = Math.min(totaltrues,totalfalses); // set the limiting amount to the lower of the trues and falses
+      int limiter =  Collections.frequency(breedable, key)/2; // set the limiting amount to the lower of the trues and falses
       // iterate the mating process up to the limiting amount
       for (int i = 1; i < limiter; i++) {
-        if (Math.random() * 100 < SpeciesTable.make(key).getReproductiveSuccess())
+        if (Math.random() * 100 < SpeciesTable.make(key).getReproductiveSuccess()){
           // set a new child to be created, depending on randomness and the reproductive success of the species
           babies++;
       }
@@ -153,7 +151,7 @@ class Ecosystem
       add (key, babies);
     }
   }
-  
+  }
   public String manifest(){
     
     String manifest="";//Start with an empty manifest

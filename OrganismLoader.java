@@ -59,6 +59,7 @@ class OrganismLoader{
     
     while(!(line=readLine()).equals("\\"+toLoad)){
       pt.add(line);
+
     }
     
     return pt;
@@ -90,7 +91,7 @@ class OrganismLoader{
     successAtHunting=readIntLine(); 
     successAtEvasion=readIntLine(); 
     agility= readIntLine();
-    return new Animal (species,foodValue,lives,reproductiveSuccess,eats,successAtHunting,successAtEvasion, agility);//Temporary return type
+    return new Animal (species,foodValue,lives,reproductiveSuccess,eats,successAtHunting,successAtEvasion, agility);
   }
 }
 

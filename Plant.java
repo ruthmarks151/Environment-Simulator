@@ -28,6 +28,10 @@ class Plant extends Organism
   
   public boolean act ()
   {
+     int capacity=(int)(((parent.getTerrain().getWater()*parent.getTerrain().getLight())/100)+0.5*parent.getTerrain().getTemp());//A formula to approximate carrying capacity
+     if(Math.random()<(parent.getPop(species)-capacity)/(1.0*capacity)){
+     parent.remove(this);
+     }
     if (Math.random() * 100 < photosynthesisSuccess){
       // photosynthesize, depending on species photosynthesis success and randomness
       photosynthesize();}

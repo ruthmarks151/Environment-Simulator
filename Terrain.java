@@ -7,6 +7,11 @@ class Terrain
     protected int temp;
     protected Ecosystem parent;
     protected String type;
+    //Getters
+    public int getLight(){return light;}
+    public int getWater(){return water;}
+    public int getTemp(){return temp;}
+        
     public Terrain (Ecosystem creator)
     {
  parent = creator;
@@ -246,10 +251,7 @@ class Terrain
     }
 
 
-    public int getLight ()
-    {
- return light;
-    }
+    
 
 
     public void changeLight (int num)
@@ -268,10 +270,7 @@ class Terrain
     }
 
 
-    public int getWater ()
-    {
- return water;
-    }
+
 
 
     public void changeWater (int num)
@@ -289,11 +288,6 @@ class Terrain
  }
     }
 
-
-    public int getTemp ()
-    {
- return temp;
-    }
 
 
     public void changeTemp (int num)
