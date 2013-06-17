@@ -13,7 +13,7 @@ class Grid extends JPanel implements MouseListener
   protected int selectedRow,selectedCol;
   protected Image selector; 
   protected MainWindow parent=null;
-  
+  protected String heatMap="None";
 //Getters
   public Ecosystem[][] getMap (){return map;}
   public int getRows() {return map.length;}
@@ -25,6 +25,7 @@ class Grid extends JPanel implements MouseListener
   //Setters
   public void setParent(MainWindow mainWin){parent=mainWin;}
   public void setMap (Ecosystem[][] newEcos){map=newEcos;}
+  public void setHeatMap(String toMap){heatMap=toMap;}
   
   public Grid (int r, int c)
   {
@@ -38,7 +39,7 @@ class Grid extends JPanel implements MouseListener
       }}
     addMouseListener(this);
     
-        super.setPreferredSize(new Dimension(c*32,r*32));
+    super.setPreferredSize(new Dimension(c*32,r*32));
   }
   
   public void advance ()
@@ -85,13 +86,30 @@ class Grid extends JPanel implements MouseListener
   //Graphics
   @Override
   protected void paintComponent(Graphics g) {
-    for(int row=0;row<map.length;row++){
-      for(int col=0;col<map[row].length;col++){    
-        g.drawImage(map[row][col].getImage(), row*32, col*32, null);} // see javadoc for more info on the parameters   
-      
+    if (heatMap.equals("None")){
+      for(int row=0;row<map.length;row++){
+        for(int col=0;col<map[row].length;col++){    
+          g.drawImage(map[row][col].getImage(), row*32, col*32, null);} // see javadoc for more info on the parameters   
+      }
+    }else{
+      int max=0;
+       for(int row=0;row<map.length;row++){
+        for(int col=0;col<map[row].length;col++){ 
+          if(map[row][col].getPop(heatMap)>max)
+            max=map[row][col].getPop(heatMap);
+        }}
+        
+      for(int row=0;row<map.length;row++){
+        for(int col=0;col<map[row].length;col++){ 
+          g.setColor(map[row][col].heatMap(heatMap,max));
+            g.fillRect(row*32,col*32,32,32);
+        }
+      }
     }
     g.drawImage(selector,selectedRow*32,selectedCol*32,null);
   }
+  
+  
   //Image IO
   private Image loadImage (String name)  //loads image from file
   {

@@ -32,25 +32,6 @@ class Simulation extends JPanel
     
     t = new Timer (1000, moveGrid);
    
-    //t.start();
-    
-    //Code to test ecosystem Editor
-    /*
-     System.out.println(myGrid.getEcosystem(0,0).manifest());
-     
-     
-     Animal predator = (Animal)(myGrid.getEcosystem(0,0).getInhabitants().get(3));
-     
-     predator.eat(myGrid.getEcosystem(0,0).getInhabitants().get(0));
-     
-     System.out.println(myGrid.getEcosystem(0,0).manifest());
-     predator.move();
-     System.out.println();
-     System.out.println(myGrid.getEcosystem(0,0).manifest());
-     System.out.println(myGrid.getEcosystem(0,1).manifest());
-     System.out.println(myGrid.getEcosystem(1,0).manifest());
-     System.out.println(myGrid.getEcosystem(1,1).manifest());
-     */
 
   }
 }
