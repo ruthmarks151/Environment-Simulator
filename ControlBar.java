@@ -63,9 +63,11 @@ class HeatMapControls extends JPanel implements ActionListener{
       
     }
    
-    super.add(species,BorderLayout.NORTH);
+    super.add(species,BorderLayout.SOUTH);
     super.add(new Gradient(),BorderLayout.CENTER);
-      
+    super.add(new JLabel("Least"),BorderLayout.WEST);
+    super.add(new JLabel("Most"),BorderLayout.EAST);
+        super.add(new JLabel("Heat Map Controls"),BorderLayout.NORTH);
     super.setVisible(true);   
   }
   
@@ -79,12 +81,15 @@ class HeatMapControls extends JPanel implements ActionListener{
 }
 /**********************************************************************************************************************/
 class Gradient extends JPanel{
-    @Override
+  Gradient(){
+  super.setPreferredSize(new Dimension(35,255));
+  }  
+  @Override
     public void paintComponent(Graphics g) {
       super.paintComponent(g);
       for (int x=0;x<255;x++){
         g.setColor(new Color(x,0,255-x));
-        g.fillRect(x,0,1,35);
+        g.fillRect(x,10,1,100);
       }
       
     }
