@@ -52,7 +52,7 @@ class Ecosystem
       for (int c = col - 1; c <= col + 1; c++)
       {
         // if the point has valid coordinates and is not the current ecosystem
-        if (r >= 0 && r < parent.getRows() && c >= 0 && c < parent.getCols() && !(r == row || c == col))
+        if (r >= 0 && r < parent.getRows() && c >= 0 && c < parent.getCols() && !(r == row && c == col))
           // add to the list of neighbours
           neighbours.add(parent.getMap()[r][c]);
       }

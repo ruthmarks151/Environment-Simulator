@@ -1,4 +1,7 @@
 /**********************************************************************************************************************/
+import java.util.ArrayList;
+import java.util.Collections;
+import java.lang.Comparable;
 class Plant extends Organism
 {
   private int photosynthesisSuccess;
@@ -42,9 +45,16 @@ class Plant extends Organism
   
   public void reproduce ()
   {
-    if (Math.random() * 100 < getReproductiveSuccess())
-      // reproduce, depending on species reproductive success and randomness
+    if (Math.random() * 100 < getReproductiveSuccess()){
+      ArrayList<Ecosystem> destinations = getAdjacent();
+    
+    // randomly select a neighbouring ecosystem
+    int choice = (int) (Math.random() * destinations.size());
+    // set the destination as the new parent, and add self to the destination
+    Ecosystem newparent = destinations.get(choice);
+    newparent.add(SpeciesTable.make(getSpecies()));
       super.reproduce();
+    }
   }
   
   public Plant clone() // implements Cloneable
