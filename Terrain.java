@@ -142,7 +142,7 @@ class Terrain
   if (water < 40 && temp > 50)
       return "Sand";
      if (left.equals ("Dirt"))
-       if (Math.random() < 0.5)
+       if (Math.random() < 0.45)
        return "Dirt";
  }
 
