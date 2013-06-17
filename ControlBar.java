@@ -21,6 +21,8 @@ class ControlBar extends JPanel{
     super.setPreferredSize(new Dimension(720,172));
     setLayout(new BorderLayout());
     
+    // add timer, save, and heatmap controls to the bar
+    
     tc=new TimerControls(this);
     sc=new SaveControls(parent.getGrid(),this);
     hc=new HeatMapControls(this);
@@ -41,7 +43,7 @@ class HeatMapControls extends JPanel implements ActionListener{
   public JComboBox species;
   private ControlBar parent;
   
-  HeatMapControls(ControlBar creator){   
+  HeatMapControls(ControlBar creator){
     super();
     parent=creator;
     
