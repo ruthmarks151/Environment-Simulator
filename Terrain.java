@@ -148,7 +148,7 @@ class Terrain
 
 
  if (left.equals ("Water") || up.equals ("Water"))
-     if (water > 75)
+     if (water > 65)
   return "Water";
  if (water > 30)
  {
@@ -174,7 +174,7 @@ class Terrain
   return "Sand";
 
  //Default
- if (water > 75)
+ if (water > 80)
      return "Water";
  if (water > 35)
  {
