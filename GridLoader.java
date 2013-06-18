@@ -17,14 +17,14 @@ class GridLoader{
   GridLoader(Grid givenGrid, String fileName){
   grid=givenGrid;
     try{
-      fr = new FileReader (fileName+".grid"); 
+      fr = new FileReader ("Saves/"+fileName+".grid"); 
       filein = new BufferedReader (fr);
     }catch (IOException e){
       System.out.println("File not Found");
     }
   }
   
-  public Ecosystem[][] read()throws IOException, NullPointerException{
+  public Ecosystem[][] read()throws IOException{
  
   headerRead();
   Ecosystem[][] map=new Ecosystem[rowSize][colSize];
@@ -36,7 +36,7 @@ class GridLoader{
    return map; 
   }
   
-  private void headerRead() throws IOException, NullPointerException{
+  private void headerRead() throws IOException{
 
   line = filein.readLine();//Name line
   line = filein.readLine ();//<Header>

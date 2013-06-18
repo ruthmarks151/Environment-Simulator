@@ -10,7 +10,7 @@ class OrganismLoader{
   OrganismLoader (String species){
     eofs=0;  
     try{
-      in = new FileReader(species+".organism");
+      in = new FileReader("Organisms/"+species+".organism");
     }
     catch(IOException e) {
       System.out.println("Organism file not found");

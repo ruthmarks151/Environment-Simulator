@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.event.*;
 
-class Simulation extends JPanel
+class LifeSimulation extends JPanel
 {
   private static Movement moveGrid;
   private static Grid myGrid;
@@ -24,8 +24,11 @@ class Simulation extends JPanel
 //Teach the species table the species that exist
     st.make("Fern");//Create a fern
     st.make("Bunny");//Create a bunny
-    st.make("Bush");
-
+    st.make("Fox");
+    st.make("Mice");
+    st.make("Grass");
+    st.make("Kitty");
+    
     MainWindow mw=new MainWindow(myGrid);
     
     moveGrid = new Movement (myGrid);

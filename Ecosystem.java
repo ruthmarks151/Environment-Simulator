@@ -37,6 +37,7 @@ class Ecosystem
     col=y;
     
     habitat = newTerrain;
+    habitat.setParent(this);
     mapSquare=loadImage(habitat.type());
     inhabitants = new ArrayList<Organism>();
   }
@@ -142,7 +143,7 @@ class Ecosystem
       int babies = 0; // declare and initialize the number of children produced
       int limiter =  Collections.frequency(breedable, key)/2; // set the limiting amount to the lower of the trues and falses
       // iterate the mating process up to the limiting amount
-      for (int i = 1; i < limiter; i++) {
+      for (int i = 0; i < limiter; i++) {
         if (Math.random() * 100 < SpeciesTable.make(key).getReproductiveSuccess()){
           // set a new child to be created, depending on randomness and the reproductive success of the species
           babies++;

@@ -12,7 +12,7 @@ class GridSaver{
     
     String name=saveName;
     try{
-     fw = new FileWriter (name+".grid"); 
+     fw = new FileWriter ("Saves/"+name+".grid"); 
      fileout = new PrintWriter (fw);}
   catch (IOException e){
   System.out.println("Fill Creation Error");

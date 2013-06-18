@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<drjava version="drjava-20120818-r5686">
+  <project autorefresh="true" build="" main="LifeSimulation" manifest="" root="" work="">
+    <createjar file="Environment Simulator.jar" flags="5"/>
+    <source>
+      <file active="true" name="Terrain.java" package="" timestamp="17-Jun-2013 21:18:37">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Animal.java" package="" timestamp="17-Jun-2013 08:44:46">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Ecosystem.java" package="" timestamp="17-Jun-2013 08:35:56">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="EcosystemEditor.java" package="" timestamp="16-Jun-2013 23:21:16">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Grid.java" package="" timestamp="16-Jun-2013 23:59:11">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="MainWindow.java" package="" timestamp="16-Jun-2013 23:59:26">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Manifest.java" package="" timestamp="16-Jun-2013 23:21:16">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="ManifestArea.java" package="" timestamp="16-Jun-2013 23:59:11">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Movement.java" package="" timestamp="16-Jun-2013 23:21:16">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Organism.java" package="" timestamp="16-Jun-2013 23:59:26">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Plant.java" package="" timestamp="17-Jun-2013 01:39:59">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="PreferenceTable.java" package="" timestamp="17-Jun-2013 01:29:03">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="SpeciesTable.java" package="" timestamp="16-Jun-2013 23:21:16">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="LifeSimulation.java" package="" timestamp="17-Jun-2013 20:53:34">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="OrganismLoader.java" package="" timestamp="17-Jun-2013 21:04:10">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="GridSaver.java" package="" timestamp="17-Jun-2013 21:10:59">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="ControlBar.java" package="" timestamp="17-Jun-2013 21:14:01">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="GridLoader.java" package="" timestamp="17-Jun-2013 21:14:01">
+        <select from="511" to="511"/>
+        <scroll column="0" row="0"/>
+      </file>
+    </source>
+    <included/>
+    <excluded/>
+    <collapsed/>
+    <classpath/>
+    <breakpoints/>
+    <watches/>
+    <bookmarks/>
+    <preferences/>
+  </project>
+</drjava>

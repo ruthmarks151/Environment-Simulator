@@ -12,6 +12,8 @@ class Terrain
     public int getWater(){return water;}
     public int getTemp(){return temp;}
         
+    public void setParent (Ecosystem newParent){parent=newParent;} 
+    
     public Terrain (Ecosystem creator)
     {
  parent = creator;
@@ -38,6 +40,25 @@ class Terrain
 
 
     //This needs to get tuned Right now it spews random junk
+    public String baseType(){
+    if (water > 80)
+  return "Water";
+     if (water > 35)
+     {
+  if (light > 80)
+      return "Short Grass";
+  if (light > 50)
+      return "Tall Grass";
+  if (light > 20)
+      return "Young Forest";
+  return "Mature Forest";
+     }
+     if (water < 35 && temp > 55)
+  return "Sand";
+     return "Dirt";
+    }
+    
+    
     public String type ()
     {
  int row = parent.getRow ();
@@ -240,8 +261,7 @@ class Terrain
      temp = 100;
  }
 
-
- type = type ();
+ type = baseType();
     }
 
 

@@ -55,6 +55,11 @@ class Animal extends Organism implements Cloneable
   // method called each time the simulation updates
   public boolean act ()
   {
+    
+     int capacity=(int)(0.5*(parent.getTerrain().getWater()));//A formula to approximate carrying capacity
+     if(parent.getPop(species)>capacity){
+       energy-=2;
+     }
     // select a target for predation
     Organism prey = pickPrey();
     if (prey != null)

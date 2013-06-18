@@ -135,9 +135,7 @@ class SaveControls extends JPanel implements ActionListener{
       try{
         grid.setMap(gl.read());
       }catch (IOException ioex){
-        System.out.println("File load Failed");
-      }catch (NullPointerException npex){
-        System.out.println("File load Failed");
+        System.out.println("File load Failed ioex");
       }
     }
     parent.getParent().refresh(); 
@@ -174,10 +172,10 @@ class TimerControls extends JPanel implements ActionListener, ChangeListener{
     if (e.getSource().equals(pausePlay)){
       if(pausePlay.getText().equals("Play")){
         pausePlay.setText("Pause");
-        Simulation.timer().start();
+        LifeSimulation.timer().start();
       }else{
         pausePlay.setText("Play");
-        Simulation.timer().stop();
+        LifeSimulation.timer().stop();
       } 
       
     }
@@ -187,7 +185,7 @@ class TimerControls extends JPanel implements ActionListener, ChangeListener{
     JSlider source = (JSlider)e.getSource();
     if (!source.getValueIsAdjusting()) {
       int delay =1000* (int)source.getValue();
-      Simulation.timer().setDelay(delay);
+      LifeSimulation.timer().setDelay(delay);
     }
   }
   
