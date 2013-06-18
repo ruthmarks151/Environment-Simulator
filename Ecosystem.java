@@ -209,8 +209,8 @@ class Ecosystem
     Image img = null;
     try
     {
-      img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
-      
+      //img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
+      img = ImageIO.read(getClass().getResource("Images/" + name + ".png"));
       
     }
     catch (IOException e)

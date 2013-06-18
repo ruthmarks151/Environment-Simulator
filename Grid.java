@@ -116,7 +116,9 @@ class Grid extends JPanel implements MouseListener
     Image img = null;
     try
     {
-      img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
+      InputStream is = getClass().getClassLoader().getResourceAsStream("Images/" + name + ".png");
+      img = ImageIO.read(is);
+      //img = ImageIO.read (new File ("images/" + name + ".png")); // load file into Image object
       
       
     }
